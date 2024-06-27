@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS cleanControl.service_type (
     PRIMARY KEY (id),
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE
 );
-CREATE TABLE IF NOT EXISTS cleanControl.service (
+CREATE TABLE IF NOT EXISTS cleanControl.services (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
@@ -199,4 +199,65 @@ CREATE TABLE IF NOT EXISTS cleanControl.transaction(
     FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE,
     FOREIGN KEY (transaction_type_id) REFERENCES transaction_type(id) ON DELETE CASCADE
 );
--- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... )
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.event_type (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL,
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.event_emterprise (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(500) NOT NULL,
+    active BOOLEAN NOT NULL,
+    price DECIMAL(10, 2),
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    enterprise_id INT NOT NULL,
+    event_type_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE,
+    FOREIGN KEY (event_type_id) REFERENCES event_type(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.event_services_enterprise (
+    id INT NOT NULL AUTO_INCREMENT,
+    event_id INT NOT NULL,
+    service_id INT,
+    product_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (event_id) REFERENCES event_emterprise(id) ON DELETE CASCADE,
+    FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.scheduler_type (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS cleanControl.scheduler (
+    id INT NOT NULL AUTO_INCREMENT,
+    date TIMESTAMP NOT NULL,
+    active BOOLEAN NOT NULL,
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    enterprise_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE
+);
+
+-- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga 
