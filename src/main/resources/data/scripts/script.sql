@@ -5,7 +5,9 @@ SELECT c.name,
     a.number,
     a.city,
     a.state,
-    a.cep
+    a.cep,
+    a.update_date,
+    a.create_date
 FROM cleanControl.client c
     JOIN cleanControl.address a ON c.address_id = a.id;
 
