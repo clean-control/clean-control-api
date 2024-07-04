@@ -295,7 +295,7 @@ VALUES (
         NOW(),
         NOW()
     );
-INSERT INTO cleanControl.service (
+INSERT INTO cleanControl.services (
         name,
         description,
         price,
@@ -438,3 +438,114 @@ VALUES (
         1
     ),
     (300.00, 'Boleto', 1, 'Pendente', NOW(), NOW(), 2);
+
+
+    INSERT INTO cleanControl.event_type (
+        name,
+        description,
+        active,
+        create_date,
+        update_date
+    )
+    VALUES (
+        'Festa',
+        'Evento de festa',
+        TRUE,
+        NOW(),
+        NOW()
+    ),
+    (
+        'Casamento',
+        'Evento de casamento',
+        TRUE,
+        NOW(),
+        NOW()
+    );
+
+    INSERT INTO cleanControl.event_enterprise (
+        name,
+        description,
+        active,
+        create_date,
+        update_date,
+        enterprise_id,
+        event_type_id
+    )
+    VALUES (
+        'Festa de Aniversário',
+        'Festa de aniversário de 18 anos',
+        TRUE,
+        NOW(),
+        NOW(),
+        1,
+        1
+    ),
+    (
+        'Casamento de Maria e João',
+        'Casamento de Maria e João',
+        TRUE,
+        NOW(),
+        NOW(),
+        2,
+        2
+    );
+
+    INSERT INTO cleanControl.event_services_enterprise (
+        event_id,
+        service_id,
+        product_id
+    )
+    VALUES (
+        1,
+        1,
+        1
+    ),
+    (
+        2,
+        2,
+        2
+    );
+
+    INSERT INTO cleanControl.scheduler_type (
+        name,
+        description,
+        create_date,
+        update_date
+    )
+
+    VALUES (
+        'Diário',
+        'Agendamento diário',
+        NOW(),
+        NOW()
+    ),
+    (
+        'Semanal',
+        'Agendamento semanal',
+        NOW(),
+        NOW()
+    );
+
+    INSERT INTO cleanControl.scheduler (
+        date,
+        active,
+        create_date,
+        update_date,
+        enterprise_id
+    )
+
+    VALUES (
+        '2021-12-01 08:00:00',
+        TRUE,
+        NOW(),
+        NOW(),
+        1
+    ),
+    (
+        '2021-12-01 14:00:00',
+        TRUE,
+        NOW(),
+        NOW(),
+        2
+    );
+
