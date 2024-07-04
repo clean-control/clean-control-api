@@ -1,16 +1,16 @@
 package com.example.cleancontrol.model;
 
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,30 +23,30 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
+public class TransactionClient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String street;
+    private Double total;
 
-    private Integer number;
+    private String paymentMethod;
 
-    private String complement;
+    @ManyToOne
+    private TransactionType transactionType;
 
-    private String neighborhood;
+    private String status;
 
-    private String city;
-
-    private String state;
-
-    private String cep;
+    @ManyToOne
+    private Client client;
 
     @CreationTimestamp
     private LocalDateTime createDate;
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
+   
 
 }

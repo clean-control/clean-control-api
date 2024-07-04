@@ -1,4 +1,3 @@
-DROP database cleanControl;
 CREATE DATABASE cleanControl;
 USE cleanControl;
 CREATE TABLE IF NOT EXISTS cleanControl.address (
@@ -212,7 +211,7 @@ CREATE TABLE IF NOT EXISTS cleanControl.event_type (
 );
 
 
-CREATE TABLE IF NOT EXISTS cleanControl.event_emterprise (
+CREATE TABLE IF NOT EXISTS cleanControl.event_enterprise (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(500) NOT NULL,
@@ -234,7 +233,7 @@ CREATE TABLE IF NOT EXISTS cleanControl.event_services_enterprise (
     service_id INT,
     product_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (event_id) REFERENCES event_emterprise(id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES event_enterprise(id) ON DELETE CASCADE,
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
 );

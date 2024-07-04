@@ -1,16 +1,18 @@
 package com.example.cleancontrol.model;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.annotation.Generated;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,6 +50,9 @@ public class Client {
     private String imgUrl;
 
     private Boolean active;
+
+    @ManyToOne
+    private Address addressId;
 
     @CreationTimestamp
     private LocalDateTime createDate;

@@ -462,7 +462,7 @@ VALUES (
         NOW()
     );
 
-    INSERT INTO cleanControl.event_emterprise (
+    INSERT INTO cleanControl.event_enterprise (
         name,
         description,
         active,

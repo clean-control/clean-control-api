@@ -1,5 +1,6 @@
 package com.example.cleancontrol.model;
 
+
 import java.time.LocalDateTime;
 
 
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,30 +25,27 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String street;
-
-    private Integer number;
-
-    private String complement;
-
-    private String neighborhood;
-
-    private String city;
-
-    private String state;
-
-    private String cep;
-
-    @CreationTimestamp
-    private LocalDateTime createDate;
-
-    @UpdateTimestamp
-    private LocalDateTime updateDate;
+public class ProductType {
+    
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
+    
+        private String name;
+    
+        private String description;
+    
+        @ManyToOne
+        private Category categoryId;
+    
+        private String imgUrl;
+    
+        private Boolean active;
+    
+        @CreationTimestamp
+        private LocalDateTime createDate;
+    
+        @UpdateTimestamp
+        private LocalDateTime updateDate;
 
 }

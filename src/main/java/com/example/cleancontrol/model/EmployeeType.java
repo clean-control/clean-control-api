@@ -1,5 +1,6 @@
 package com.example.cleancontrol.model;
 
+
 import java.time.LocalDateTime;
 
 
@@ -23,30 +24,22 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String street;
-
-    private Integer number;
-
-    private String complement;
-
-    private String neighborhood;
-
-    private String city;
-
-    private String state;
-
-    private String cep;
-
-    @CreationTimestamp
-    private LocalDateTime createDate;
-
-    @UpdateTimestamp
-    private LocalDateTime updateDate;
+public class EmployeeType {
+    
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
+    
+        private String name;
+    
+        private String description;
+    
+        private Boolean active;
+    
+        @CreationTimestamp
+        private LocalDateTime createDate;
+    
+        @UpdateTimestamp
+        private LocalDateTime updateDate;
 
 }
