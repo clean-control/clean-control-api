@@ -400,25 +400,7 @@ VALUES (
         NOW(),
         NOW()
     );
-INSERT INTO cleanControl.transaction_client (
-        total,
-        payment_method,
-        transaction_type_id,
-        status,
-        create_date,
-        update_date,
-        client_id
-    )
-VALUES (
-        150.00,
-        'Cartão de Crédito',
-        1,
-        'Concluída',
-        NOW(),
-        NOW(),
-        1
-    ),
-    (250.00, 'Boleto', 1, 'Pendente', NOW(), NOW(), 2);
+
 INSERT INTO cleanControl.transaction (
         total,
         payment_method,
@@ -426,7 +408,8 @@ INSERT INTO cleanControl.transaction (
         status,
         create_date,
         update_date,
-        enterprise_id
+        enterprise_id,
+        client_id
     )
 VALUES (
         500.00,
@@ -435,9 +418,9 @@ VALUES (
         'Concluída',
         NOW(),
         NOW(),
-        1
+        1,1
     ),
-    (300.00, 'Boleto', 1, 'Pendente', NOW(), NOW(), 2);
+    (300.00, 'Boleto', 1, 'Pendente', NOW(), NOW(), 2,2);
 
 
     INSERT INTO cleanControl.event_type (

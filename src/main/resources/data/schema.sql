@@ -172,19 +172,7 @@ CREATE TABLE IF NOT EXISTS cleanControl.transaction_type (
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
-CREATE TABLE IF NOT EXISTS cleanControl.transaction_client (
-    id INT NOT NULL AUTO_INCREMENT,
-    total DECIMAL(10, 2) NOT NULL,
-    payment_method VARCHAR(255) NOT NULL,
-    transaction_type_id INT NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    create_date TIMESTAMP NOT NULL,
-    update_date TIMESTAMP NOT NULL,
-    client_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE,
-    FOREIGN KEY (transaction_type_id) REFERENCES transaction_type(id) ON DELETE CASCADE
-);
+
 CREATE TABLE IF NOT EXISTS cleanControl.transaction(
     id INT NOT NULL AUTO_INCREMENT,
     total DECIMAL(10, 2) NOT NULL,
@@ -194,8 +182,10 @@ CREATE TABLE IF NOT EXISTS cleanControl.transaction(
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
     enterprise_id INT NOT NULL,
+    client_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE,
+    FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE,
     FOREIGN KEY (transaction_type_id) REFERENCES transaction_type(id) ON DELETE CASCADE
 );
 
