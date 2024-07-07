@@ -37,6 +37,9 @@ public class Transaction {
     private TransactionType transactionType;
 
     private String status;
+    
+    @ManyToOne
+    private Enterprise enterprise;
 
     @CreationTimestamp
     private LocalDateTime createDate;
@@ -44,7 +47,6 @@ public class Transaction {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @ManyToOne
-    private Enterprise enterprise;
+
 
 }

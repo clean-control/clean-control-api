@@ -41,6 +41,12 @@ public class Services {
     private String imgUrl;
 
     private Boolean active;
+    
+    @ManyToOne
+    private Enterprise enterpriseId;
+
+    @ManyToOne
+    private ServiceType serviceTypeId;
 
     @CreationTimestamp
     private LocalDateTime createDate;
@@ -48,10 +54,5 @@ public class Services {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @ManyToOne
-    private Enterprise enterpriseId;
-
-    @ManyToOne
-    private ServiceType serviceTypeId;
 
 }
