@@ -22,16 +22,6 @@ FROM cleanControl.product p
     JOIN cleanControl.category c ON pt.category_id = c.id;
 
 
-SELECT tc.total,
-    tc.payment_method,
-    tc.status,
-    t.name AS transaction_type,
-    cl.name AS client_name
-FROM cleanControl.transaction_client tc
-    JOIN cleanControl.transaction_type t ON tc.transaction_type_id = t.id
-    JOIN cleanControl.client cl ON tc.client_id = cl.id;
-
-
 SELECT e.name,
     e.lastname,
     et.name AS employee_type,
