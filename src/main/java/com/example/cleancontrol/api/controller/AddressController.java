@@ -1,6 +1,5 @@
 package com.example.cleancontrol.api.controller;
 
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -24,41 +23,66 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AddressController {
 
-
     private final AddressService addressService;
 
     @GetMapping
     public ResponseEntity<List<AddressResponse>> getAllAddress() {
-        // return addressService.getAllAddress();
-        return null;
+
+        try {
+            List<AddressResponse> address = addressService.getAllAddress();
+            return ResponseEntity.ok(address);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AddressResponse> getAddressById(@PathVariable Integer id) {
-        // return addressService.getAddressById(id);
-        return null;
 
+        try {
+            AddressResponse address = addressService.getAddressById(id);
+            return ResponseEntity.ok(address);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
-
     @PostMapping
-    public  ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest data){
-        // return addressService.createAddress(data);
-        return null;
+    public ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest data) {
 
+        try {
+            AddressResponse address = addressService.saveAddress(data);
+            return ResponseEntity.ok(address);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressResponse> updateAddress(@PathVariable Integer id, @RequestBody AddressRequest data){
-        // return addressService.updateAddress(id, data);
-        return null;
+    public ResponseEntity<AddressResponse> updateAddress(@PathVariable Integer id, @RequestBody AddressRequest data) {
 
+        try {
+            AddressResponse address = addressService.updateAddress(id, data);
+            return ResponseEntity.ok(address);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAddress(@PathVariable Integer id){
-        // return addressService.deleteAddress(id);
-        return null;
+    public ResponseEntity<Void> deleteAddress(@PathVariable Integer id) {
 
+        try {
+            addressService.deleteAddress(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

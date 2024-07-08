@@ -25,8 +25,6 @@ public class AddressMapper {
         return new Address(null, addressRequest.street(), addressRequest.number(), addressRequest.complement(), addressRequest.neighborhood(), addressRequest.city(), addressRequest.state(), addressRequest.cep(), null, null);
     }
 
-    public Address toEntity(AddressRequest addressRequest, Integer id) {
-        return new Address(id, addressRequest.street(), addressRequest.number(), addressRequest.complement(), addressRequest.neighborhood(), addressRequest.city(), addressRequest.state(), addressRequest.cep(), null, null);
-    }
+    
 
 }
