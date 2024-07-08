@@ -27,8 +27,7 @@ public class AddressService {
             return address.stream().map(addressMapper::toResponse).collect(Collectors.toList());
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
+            throw new RuntimeException("Erro ao buscar Address");
         }
 
     }
@@ -42,8 +41,7 @@ public class AddressService {
             Address address = addressRepository.findById(id).orElseThrow();
             return addressMapper.toResponse(address);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
+            throw new RuntimeException("Erro ao buscar categorias");
         }
     }
 
@@ -60,9 +58,7 @@ public class AddressService {
 
             return addressMapper.toResponse(address);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-
-            return null;
+            throw new RuntimeException("Erro ao salvar o endereço");
         }
     }
 
@@ -93,7 +89,8 @@ public class AddressService {
 
             return addressMapper.toResponse(addressRepository.save(newAddress));
         } catch (Exception e) {
-            return null;
+            throw new RuntimeException("Erro ao atualizar o endereço");
+            
         }
     }
 
@@ -106,7 +103,8 @@ public class AddressService {
 
             addressRepository.deleteById(id);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Erro ao deletar o endereço");
+
         }
     }
 }

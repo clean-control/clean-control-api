@@ -34,6 +34,7 @@ public class File {
     private String description;
 
     private String fileExtension;
+    private Double fileSize;
 
     private String path;
 

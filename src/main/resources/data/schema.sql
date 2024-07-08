@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS cleanControl.file (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     file_extension VARCHAR(255) NOT NULL,
-    
+    file_size DECIMAL(10, 2) NOT NULL,
     path VARCHAR(255) NOT NULL,
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
