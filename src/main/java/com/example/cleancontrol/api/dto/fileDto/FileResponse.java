@@ -7,4 +7,5 @@ import com.example.cleancontrol.domain.model.Employee;
 
 public record FileResponse(Integer id, String name, String description, String fileExtension, String path,Double fileSize, Client client, Employee employee, LocalDateTime createDate, LocalDateTime updateDate) {
 
+
 }

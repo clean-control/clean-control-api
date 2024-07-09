@@ -23,7 +23,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class File {
+public class Content {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
