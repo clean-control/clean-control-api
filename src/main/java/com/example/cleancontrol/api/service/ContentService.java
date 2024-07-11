@@ -35,28 +35,22 @@ public class ContentService {
                 throw new RuntimeException("Arquivo não pode ser nulo");
             }
 
-            
 
+            Object user  = buscarUsuarioPorTipo(userId, type);
+
+            if (user == null) {
+                throw new RuntimeException("Usuário não encontrado");
+            }
             String fileDownloadUri = fileService.upload(file);
 
-            Object user = null;
-            if (type.equals("Client")) {
-                user = clientRepository.findById(userId)
-                        .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-            } else if (type.equals("Employee")) {
-                user = employeeRepository.findById(userId)
-                        .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
-            } else {
-                throw new RuntimeException("Tipo de usuário inválido");
-            }
 
             Content fileResponse = Content.builder()
                     .name(file.getOriginalFilename())
                     .path(fileDownloadUri)
                     .fileExtension(file.getContentType())
                     .fileSize((double) file.getSize())
-                    .client(type.equals("Client") ? (Client) user : null)
-                    .employee(type.equals("Employee") ? (Employee) user : null)
+                    .client(user instanceof Client ? (Client) user : null)
+                    .employee(user instanceof Employee ? (Employee) user : null)
                     .build();
 
             Content content = contentRepository.save(fileResponse);
@@ -69,4 +63,16 @@ public class ContentService {
         }
     }
 
+
+
+    private Object buscarUsuarioPorTipo(Integer userId, String type) {
+        type = type.toLowerCase();
+        if (type.equals("client")) {
+            return clientRepository.findById(userId).orElse(null);
+        } else if (type.equals("employee")) {
+            return employeeRepository.findById(userId).orElse(null);
+        } else {
+            return null;
+        }
+    }
 }

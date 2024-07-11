@@ -22,7 +22,12 @@ public class ContentController {
     @PostMapping("/upload")
     public ResponseEntity<FileResponse> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("userId") Integer userId, @RequestParam("type") String type){
 
-        FileResponse response = contentService.uploadFile(file, userId, type);
-        return ResponseEntity.ok(response);
+       try {
+           FileResponse fileResponse = contentService.uploadFile(file, userId, type);
+           return ResponseEntity.ok(fileResponse);
+       } catch (Exception e) {
+           return ResponseEntity.badRequest().build();
+       }
+        
     }
 }

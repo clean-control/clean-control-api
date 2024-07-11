@@ -8,11 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.example.cleancontrol.api.dto.fileDto.FileResponse;
 import com.example.cleancontrol.config.FileStorageApiProperties;
-import com.example.cleancontrol.domain.model.Content;
-import com.example.cleancontrol.domain.repository.ContentRepository;
-import lombok.RequiredArgsConstructor;
 
 @Service
 public class FileService {
