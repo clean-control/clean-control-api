@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.cleancontrol.api.service.CategoryService;
-import com.example.cleancontrol.api.dto.categoryDto.*;
+import com.example.cleancontrol.api.service.ClientService;
+import com.example.cleancontrol.api.dto.clientDto.*;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/api/client")
 @RequiredArgsConstructor
-public class CategoryController {
+public class ClientController {
 
-    private final CategoryService categoryService;
+    private final ClientService clientService;
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> getAllCategory(){
+    public ResponseEntity<List<ClientResponse>> getAllClient(){
 
           try {
-            List<CategoryResponse> category = categoryService.findAll();
-            return ResponseEntity.ok(category);
+            List<ClientResponse> client = clientService.findAll();
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -36,23 +36,10 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> getCategory(@PathVariable Integer id){
+    public ResponseEntity<ClientResponse> getClient(@PathVariable Integer id){
         try {
-            CategoryResponse category = categoryService.findById(id);
-            return ResponseEntity.ok(category);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-
-    @PostMapping("/active/{id}")
-    public ResponseEntity<CategoryResponse> activeCategory(@PathVariable Integer id){
-        try {
-             categoryService.activeCategory(id);
-             return ResponseEntity.noContent().build();
-            
+            ClientResponse client = clientService.findById(id);
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -60,35 +47,43 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> save(@RequestBody CategoryRequest data){
+    public ResponseEntity<ClientResponse> saveClient(@RequestBody ClientRequest data){
         try {
-            CategoryResponse category = categoryService.save(data);
-            return ResponseEntity.status(201).body(category);
+            ClientResponse client = clientService.save(data);
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponse> update(@PathVariable Integer id, @RequestBody CategoryRequest data){
+    public ResponseEntity<ClientResponse> updateClient(@PathVariable Integer id, @RequestBody ClientRequest data){
         try {
-            CategoryResponse category = categoryService.update(id, data);
-
-            return ResponseEntity.ok(category);
+            ClientResponse client = clientService.update(id, data);
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteClient(@PathVariable Integer id){
         try {
-             categoryService.delete(id);
-             return ResponseEntity.noContent().build();
+            clientService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/active/{id}")
+    public ResponseEntity<Void> activeClient(@PathVariable Integer id){
+        try {
+            clientService.activeClient(id);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();

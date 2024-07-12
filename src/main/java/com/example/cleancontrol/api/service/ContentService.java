@@ -1,15 +1,10 @@
 package com.example.cleancontrol.api.service;
 
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.example.cleancontrol.api.dto.fileDto.FileResponse;
-import com.example.cleancontrol.config.FileStorageApiProperties;
 import com.example.cleancontrol.domain.model.Client;
 import com.example.cleancontrol.domain.model.Content;
 import com.example.cleancontrol.domain.model.Employee;
@@ -32,14 +27,14 @@ public class ContentService {
     public FileResponse uploadFile(MultipartFile file, Integer userId, String type) {
         try {
             if (file == null) {
-                throw new RuntimeException("Arquivo não pode ser nulo");
+                throw new Exception("Arquivo não pode ser nulo");
             }
 
 
             Object user  = buscarUsuarioPorTipo(userId, type);
 
             if (user == null) {
-                throw new RuntimeException("Usuário não encontrado");
+                throw new Exception("Usuário não encontrado");
             }
             String fileDownloadUri = fileService.upload(file);
 
