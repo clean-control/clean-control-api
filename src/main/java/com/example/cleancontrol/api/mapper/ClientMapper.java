@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.example.cleancontrol.api.dto.clientDto.ClientRequest;
 import com.example.cleancontrol.api.dto.clientDto.ClientResponse;
 import com.example.cleancontrol.domain.model.Client;
 

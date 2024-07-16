@@ -25,6 +25,7 @@ public class FileService {
     public  String upload(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
+            @SuppressWarnings("rawtypes")
             Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("public_id", fileName));
             return (String) uploadResult.get("url");
         } catch (Exception e) {
