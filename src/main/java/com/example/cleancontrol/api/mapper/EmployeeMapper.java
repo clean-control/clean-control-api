@@ -1,5 +1,4 @@
 package com.example.cleancontrol.api.mapper;
-import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 

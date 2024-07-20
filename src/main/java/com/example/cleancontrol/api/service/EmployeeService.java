@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.employeeDto.EmployeeRequest;
 import com.example.cleancontrol.api.dto.employeeDto.EmployeeResponse;
-import com.example.cleancontrol.api.dto.employeeTypeDto.EmployeeTypeRequest;
 import com.example.cleancontrol.api.mapper.EmployeeMapper;
 import com.example.cleancontrol.domain.model.Employee;
 import com.example.cleancontrol.domain.model.EmployeeType;
@@ -56,7 +55,7 @@ public class EmployeeService {
                     .imgUrl(employeeRequest.imgUrl())
                     .nickname(employeeRequest.nickname())
                     .lastname(employeeRequest.lastname())
-
+ 
                     .active(employeeRequest.active())
                     .enterprise(enterpriseRepository.findById(employeeRequest.enterpriseId()).get())
                     .employeeType(employeeTypeRepository.findById(employeeRequest.employeeTypeId()).get())

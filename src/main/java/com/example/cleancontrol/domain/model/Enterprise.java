@@ -44,7 +44,7 @@ public class Enterprise {
     private String imgLogo;
 
     private Boolean active;
-
+ 
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
