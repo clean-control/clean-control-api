@@ -90,4 +90,13 @@ public class EnterpriseService {
             throw new RuntimeException("Error to update enterprise");
         }
     }
+
+
+    public void delete(Integer id) {
+        try {
+            enterpriseRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error to delete enterprise");
+        }
+    }
 }
