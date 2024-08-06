@@ -1,5 +1,4 @@
 package com.example.cleancontrol.api.controller;
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -12,38 +11,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
-import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
-import com.example.cleancontrol.api.service.AddressService;
+import com.example.cleancontrol.api.service.EmployeeService;
+
+import com.example.cleancontrol.api.dto.employeeDto.*;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/address")
+@RequestMapping("/api/employee")
 @RequiredArgsConstructor
-public class AddressController {
+public class EmployeeController {
 
-    private final AddressService addressService;
+    private final EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<AddressResponse>> getAllAddress() {
+    public ResponseEntity<List<EmployeeResponse>> getAllEmployee(){
 
-        try {
-            List<AddressResponse> address = addressService.getAllAddress();
-            return ResponseEntity.ok(address);
+          try {
+            List<EmployeeResponse> employee = employeeService.findAll();
+            return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AddressResponse> getAddressById(@PathVariable Integer id) {
-
+    public ResponseEntity<EmployeeResponse> getEmployee(@PathVariable Integer id){
         try {
-            AddressResponse address = addressService.getAddressById(id);
-            return ResponseEntity.ok(address);
+            EmployeeResponse employee = employeeService.findById(id);
+            return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -51,11 +48,10 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest data) {
-
+    public ResponseEntity<EmployeeResponse> saveEmployee(@RequestBody EmployeeRequest data){
         try {
-            AddressResponse address = addressService.saveAddress(data);
-            return ResponseEntity.ok(address);
+            EmployeeResponse employee = employeeService.save(data);
+            return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -63,26 +59,37 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressResponse> updateAddress(@PathVariable Integer id, @RequestBody AddressRequest data) {
-
+    public ResponseEntity<EmployeeResponse> updateEmployee(@PathVariable Integer id, @RequestBody EmployeeRequest data){
         try {
-            AddressResponse address = addressService.updateAddress(id, data);
-            return ResponseEntity.ok(address);
+            EmployeeResponse employee = employeeService.update(id, data);
+            return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/active/{id}")
+    public ResponseEntity<Void> getActiveEmployee(@PathVariable Integer id){
+        try {
+            employeeService.active(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+      
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAddress(@PathVariable Integer id) {
-
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Integer id){
         try {
-            addressService.deleteAddress(id);
-            return ResponseEntity.noContent().build();
+            employeeService.delete(id);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
+
 }

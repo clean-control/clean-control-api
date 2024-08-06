@@ -1,12 +1,5 @@
 package com.example.cleancontrol.domain.model;
-
-
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,22 +11,40 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+
 @Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Scheduler {
-
+public class Content {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Date date;
+    private String name;
 
-    private Boolean active;
+    private String description;
+
+    private String fileExtension;
+    private Double fileSize;
+
+    private String path;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     @CreationTimestamp
     private LocalDateTime createDate;
@@ -41,7 +52,5 @@ public class Scheduler {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @ManyToOne
-    private Enterprise enterprise;
 
 }

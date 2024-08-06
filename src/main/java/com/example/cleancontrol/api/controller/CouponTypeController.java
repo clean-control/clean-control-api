@@ -1,5 +1,4 @@
 package com.example.cleancontrol.api.controller;
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -12,38 +11,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
-import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
-import com.example.cleancontrol.api.service.AddressService;
+import com.example.cleancontrol.api.service.CouponTypeService;
+
+import com.example.cleancontrol.api.dto.couponTypeDto.*;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/address")
+@RequestMapping("/api/couponType")
 @RequiredArgsConstructor
-public class AddressController {
+public class CouponTypeController {
 
-    private final AddressService addressService;
+    private final CouponTypeService couponTypeService;
 
     @GetMapping
-    public ResponseEntity<List<AddressResponse>> getAllAddress() {
+    public ResponseEntity<List<CouponTypeResponse>> getAllCouponType(){
 
-        try {
-            List<AddressResponse> address = addressService.getAllAddress();
-            return ResponseEntity.ok(address);
+          try {
+            List<CouponTypeResponse> couponType = couponTypeService.findAll();
+            return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AddressResponse> getAddressById(@PathVariable Integer id) {
-
+    public ResponseEntity<CouponTypeResponse> getCouponType(@PathVariable Integer id){
         try {
-            AddressResponse address = addressService.getAddressById(id);
-            return ResponseEntity.ok(address);
+            CouponTypeResponse couponType = couponTypeService.findById(id);
+            return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -51,11 +48,10 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest data) {
-
+    public ResponseEntity<CouponTypeResponse> saveCouponType(@RequestBody CouponTypeRequest data){
         try {
-            AddressResponse address = addressService.saveAddress(data);
-            return ResponseEntity.ok(address);
+            CouponTypeResponse couponType = couponTypeService.save(data);
+            return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -63,11 +59,10 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressResponse> updateAddress(@PathVariable Integer id, @RequestBody AddressRequest data) {
-
+    public ResponseEntity<CouponTypeResponse> updateCouponType(@PathVariable Integer id, @RequestBody CouponTypeRequest data){
         try {
-            AddressResponse address = addressService.updateAddress(id, data);
-            return ResponseEntity.ok(address);
+            CouponTypeResponse couponType = couponTypeService.update(id, data);
+            return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -75,11 +70,10 @@ public class AddressController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAddress(@PathVariable Integer id) {
-
+    public ResponseEntity<Void> deleteCouponType(@PathVariable Integer id){
         try {
-            addressService.deleteAddress(id);
-            return ResponseEntity.noContent().build();
+            couponTypeService.delete(id);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
