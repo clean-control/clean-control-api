@@ -249,4 +249,20 @@ CREATE TABLE IF NOT EXISTS cleanControl.scheduler (
     FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE IF NOT EXISTS cleanControl.file (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    file_extension VARCHAR(255) NOT NULL,
+    file_size DECIMAL(10, 2) NOT NULL,
+    path VARCHAR(255) NOT NULL,
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    client_id INT ,
+    employee_id INT ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE,
+    FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE
+    );
 -- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga 

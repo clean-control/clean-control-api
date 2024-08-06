@@ -1,5 +1,4 @@
 package com.example.cleancontrol.api.controller;
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -12,38 +11,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
-import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
-import com.example.cleancontrol.api.service.AddressService;
+import com.example.cleancontrol.api.service.ClientService;
+import com.example.cleancontrol.api.dto.clientDto.*;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/address")
+@RequestMapping("/api/client")
 @RequiredArgsConstructor
-public class AddressController {
+public class ClientController {
 
-    private final AddressService addressService;
+    private final ClientService clientService;
 
     @GetMapping
-    public ResponseEntity<List<AddressResponse>> getAllAddress() {
+    public ResponseEntity<List<ClientResponse>> getAllClient(){
 
-        try {
-            List<AddressResponse> address = addressService.getAllAddress();
-            return ResponseEntity.ok(address);
+          try {
+            List<ClientResponse> client = clientService.findAll();
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AddressResponse> getAddressById(@PathVariable Integer id) {
-
+    public ResponseEntity<ClientResponse> getClient(@PathVariable Integer id){
         try {
-            AddressResponse address = addressService.getAddressById(id);
-            return ResponseEntity.ok(address);
+            ClientResponse client = clientService.findById(id);
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -51,11 +47,10 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest data) {
-
+    public ResponseEntity<ClientResponse> saveClient(@RequestBody ClientRequest data){
         try {
-            AddressResponse address = addressService.saveAddress(data);
-            return ResponseEntity.ok(address);
+            ClientResponse client = clientService.save(data);
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -63,11 +58,10 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressResponse> updateAddress(@PathVariable Integer id, @RequestBody AddressRequest data) {
-
+    public ResponseEntity<ClientResponse> updateClient(@PathVariable Integer id, @RequestBody ClientRequest data){
         try {
-            AddressResponse address = addressService.updateAddress(id, data);
-            return ResponseEntity.ok(address);
+            ClientResponse client = clientService.update(id, data);
+            return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -75,11 +69,21 @@ public class AddressController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAddress(@PathVariable Integer id) {
-
+    public ResponseEntity<Void> deleteClient(@PathVariable Integer id){
         try {
-            addressService.deleteAddress(id);
-            return ResponseEntity.noContent().build();
+            clientService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/active/{id}")
+    public ResponseEntity<Void> activeClient(@PathVariable Integer id){
+        try {
+            clientService.activeClient(id);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
