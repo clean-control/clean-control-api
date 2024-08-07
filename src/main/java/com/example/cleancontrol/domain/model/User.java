@@ -25,22 +25,44 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
 
-    @Id
+public class User {
+   @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String name;
+
+    private String lastname;
+
+    private String nickname;
+
+    private String email;
+
+    private String password;
+
+    private String cpf;
+
+    private String phone;
+
+    private Date dateBirth;
+
+    private String imgUrl;
+
+    private Boolean active;
 
     
+    @ManyToOne
+    @JoinColumn(name = "user_type_id")
+    private UserType userType;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @CreationTimestamp
     private LocalDateTime createDate;
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
-
 }

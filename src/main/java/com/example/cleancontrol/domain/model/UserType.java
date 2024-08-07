@@ -1,14 +1,10 @@
 package com.example.cleancontrol.domain.model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,17 +21,16 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+
+public class UserType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String name;
 
-    
+    private String description;
 
     @CreationTimestamp
     private LocalDateTime createDate;

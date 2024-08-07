@@ -31,26 +31,10 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private String name;
-
-    private String lastname;
-
-    private String nickname;
-
-    private String email;
-
-    private String password;
-
-    private String cpf;
-
-    private String phone;
-
-    private Date dateBirth;
-
-    private String imgUrl;
-
-    private Boolean active;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "employee_type_id")
