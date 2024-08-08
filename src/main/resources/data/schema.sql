@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS cleanControl.user_type (
 );
 
 
-CREATE TABLE IF NOT EXISTS cleanControl.user (
+CREATE TABLE IF NOT EXISTS cleanControl.users (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
@@ -50,11 +50,11 @@ CREATE TABLE IF NOT EXISTS cleanControl.user (
 
 CREATE TABLE IF NOT EXISTS cleanControl.client (
     id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
+    users_id INT NOT NULL,
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS cleanControl.enterprise (
@@ -83,13 +83,13 @@ CREATE TABLE IF NOT EXISTS cleanControl.employee_type (
 );
 CREATE TABLE IF NOT EXISTS cleanControl.employee (
     id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
+    users_id INT NOT NULL,
     employee_type_id INT NOT NULL,
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
     enterprise_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE,
     FOREIGN KEY (employee_type_id) REFERENCES employee_type(id) ON DELETE CASCADE
 );

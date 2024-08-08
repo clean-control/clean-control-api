@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 import com.example.cleancontrol.api.dto.employeeDto.EmployeeResponse;
 import com.example.cleancontrol.domain.model.EmployeeType;
 import com.example.cleancontrol.domain.model.Enterprise;
-import com.example.cleancontrol.domain.model.User;
+import com.example.cleancontrol.domain.model.Users;
 
 @Component
 public class EmployeeMapper {
 
-    public EmployeeResponse toResponse(User employee, EmployeeType employeeType, Enterprise enterprise) {
+    public EmployeeResponse toResponse(Users employee, EmployeeType employeeType, Enterprise enterprise) {
         return EmployeeResponse.builder()
                 .id(employee.getId())
                 .name(employee.getName())

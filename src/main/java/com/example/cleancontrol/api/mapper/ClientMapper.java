@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 
 import com.example.cleancontrol.api.dto.clientDto.ClientResponse;
 import com.example.cleancontrol.domain.model.Client;
-import com.example.cleancontrol.domain.model.User;
+import com.example.cleancontrol.domain.model.Users;
 
 @Component
 public class ClientMapper {
 
 
-    public ClientResponse toResponse(User user) {
+    public ClientResponse toResponse(Users user) {
         return ClientResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
@@ -29,7 +29,7 @@ public class ClientMapper {
     }
 
     
-    public List<ClientResponse> toResponse(List<User> users) {
+    public List<ClientResponse> toResponse(List<Users> users) {
         return users.stream().map(this::toResponse).collect(Collectors.toList());
     }
 

@@ -33,8 +33,8 @@ public class Employee {
     private Integer id;
     
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "users_id")
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "employee_type_id")

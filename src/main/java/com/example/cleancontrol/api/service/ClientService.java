@@ -12,7 +12,7 @@ import com.example.cleancontrol.api.dto.clientDto.ClientResponse;
 import com.example.cleancontrol.api.mapper.ClientMapper;
 import com.example.cleancontrol.domain.model.Address;
 import com.example.cleancontrol.domain.model.Client;
-import com.example.cleancontrol.domain.model.User;
+import com.example.cleancontrol.domain.model.Users;
 import com.example.cleancontrol.domain.model.UserType;
 import com.example.cleancontrol.domain.repository.AddressRepository;
 import com.example.cleancontrol.domain.repository.ClientRepository;
@@ -73,7 +73,7 @@ public class ClientService {
                 throw new NullPointerException();
             }
 
-         User user = new User();
+         Users user = new Users();
 
             user.setName(data.name());
             user.setLastname(data.lastname());

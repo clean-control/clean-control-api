@@ -11,7 +11,7 @@ import com.example.cleancontrol.api.mapper.EmployeeMapper;
 import com.example.cleancontrol.domain.model.Employee;
 import com.example.cleancontrol.domain.model.EmployeeType;
 import com.example.cleancontrol.domain.model.Enterprise;
-import com.example.cleancontrol.domain.model.User;
+import com.example.cleancontrol.domain.model.Users;
 import com.example.cleancontrol.domain.repository.EmployeeRepository;
 import com.example.cleancontrol.domain.repository.EmployeeTypeRepository;
 import com.example.cleancontrol.domain.repository.EnterpriseRepository;
@@ -65,7 +65,7 @@ public class EmployeeService {
 
             EmployeeType employeeType = employeeTypeRepository.findById(employeeRequest.employeeTypeId()).get();
             Enterprise enterprise = enterpriseRepository.findById(employeeRequest.enterpriseId()).get();
-            User user = User.builder()
+            Users user = Users.builder()
                     .name(employeeRequest.name())
                     .lastname(employeeRequest.lastname())
                     .cpf(employeeRequest.cpf())
