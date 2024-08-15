@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.clientDto.ClientRequest;
@@ -29,6 +31,9 @@ public class ClientService {
     private final UserRepository userRepository;
     private final UserTypeRepository userTypeRepository;
 
+        @Autowired
+    PasswordEncoder passwordEncoder;
+
     public List<ClientResponse> findAll() {
 
         try {
@@ -38,18 +43,20 @@ public class ClientService {
 
             for (Client client : clients) {
                
-                ClientResponse clientResponse = clientMapper.toResponse( client.getUser());
+               if (client !=null && client.getUser() != null) {
 
-
-                lstClient.add(clientResponse);
-
+                System.out.println(client.getUser());
+                System.out.println(client.getId());
+                lstClient.add(clientMapper.toResponse(client.getUser()));
+                
+               }
 
             }
             
 
             return lstClient;
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao buscar clientes");
+            throw new RuntimeException("Erro ao buscar clientes: " + e.getMessage());
         }
     }
 
@@ -62,7 +69,7 @@ public class ClientService {
             Client client = clientRepository.findById(id).orElseThrow();
             return clientMapper.toResponse(client.getUser());
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao buscar clientes");
+            throw new RuntimeException("Erro ao buscar clientes: " + e.getMessage());
         }
     }
 
@@ -75,11 +82,14 @@ public class ClientService {
 
          Users user = new Users();
 
+         String passwordEncrypted = passwordEncoder.encode(data.password());
+ 
+
             user.setName(data.name());
             user.setLastname(data.lastname());
             user.setNickname(data.nickname());
             user.setEmail(data.email());
-            user.setPassword(data.password());
+            user.setPassword(passwordEncrypted);
             user.setCpf(data.cpf());
             user.setPhone(data.phone());
             user.setDateBirth(data.dateBirth());
@@ -100,7 +110,7 @@ public class ClientService {
 
             return clientMapper.toResponse(client.getUser());
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao salvar cliente");
+            throw new RuntimeException("Erro ao salvar cliente: " + e.getMessage());
         }
     }
     public void activeClient(Integer id) {
@@ -160,6 +170,7 @@ Address address = addressRepository.findById(id).orElseThrow();
             client.getUser().setDateBirth(data.dateBirth() != null ? data.dateBirth() : client.getUser().getDateBirth());
             client.getUser().setImgUrl(data.imgUrl() != null ? data.imgUrl() : client.getUser().getImgUrl());
             client.getUser().setActive(data.active() != null ? data.active() : client.getUser().getActive());
+            client.getUser().setUserType(userTypeRepository.findById(data.userTypeId()).orElseThrow());
             client.getUser().setAddress(address != null ? address : client.getUser().getAddress());
 
             clientRepository.save(client);

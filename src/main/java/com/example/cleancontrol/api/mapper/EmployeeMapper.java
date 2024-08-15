@@ -27,6 +27,7 @@ public class EmployeeMapper {
                 .active(employee.getActive())
                 .createDate(employee.getCreateDate())
                 .updateDate(employee.getUpdateDate())
+                .userType(employee.getUserType())
                 .build();
     }
 
