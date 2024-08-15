@@ -13,7 +13,20 @@ CREATE TABLE IF NOT EXISTS cleanControl.address (
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
-CREATE TABLE IF NOT EXISTS cleanControl.client (
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.user_type (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL,
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.users (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
@@ -28,9 +41,22 @@ CREATE TABLE IF NOT EXISTS cleanControl.client (
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
     address_id INT,
+    user_type_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE
+    FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_type_id) REFERENCES user_type(id) ON DELETE CASCADE
 );
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.client (
+    id INT NOT NULL AUTO_INCREMENT,
+    users_id INT NOT NULL,
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS cleanControl.enterprise (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -57,21 +83,13 @@ CREATE TABLE IF NOT EXISTS cleanControl.employee_type (
 );
 CREATE TABLE IF NOT EXISTS cleanControl.employee (
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    lastname VARCHAR(255) NOT NULL,
-    nickname VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    cpf VARCHAR(11) NOT NULL,
-    phone VARCHAR(11) NOT NULL,
-    date_birth DATE NOT NULL,
+    users_id INT NOT NULL,
     employee_type_id INT NOT NULL,
-    img_url VARCHAR(500),
-    active BOOLEAN NOT NULL,
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
     enterprise_id INT NOT NULL,
     PRIMARY KEY (id),
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE,
     FOREIGN KEY (employee_type_id) REFERENCES employee_type(id) ON DELETE CASCADE
 );

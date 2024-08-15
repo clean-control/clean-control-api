@@ -1,16 +1,16 @@
 package com.example.cleancontrol.api.mapper;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
 import com.example.cleancontrol.api.dto.employeeDto.EmployeeResponse;
-import com.example.cleancontrol.domain.model.Employee;
+import com.example.cleancontrol.domain.model.EmployeeType;
+import com.example.cleancontrol.domain.model.Enterprise;
+import com.example.cleancontrol.domain.model.Users;
 
 @Component
 public class EmployeeMapper {
 
-    public EmployeeResponse toResponse(Employee employee) {
+    public EmployeeResponse toResponse(Users employee, EmployeeType employeeType, Enterprise enterprise) {
         return EmployeeResponse.builder()
                 .id(employee.getId())
                 .name(employee.getName())
@@ -22,16 +22,16 @@ public class EmployeeMapper {
                 .imgUrl(employee.getImgUrl())
                 .password(employee.getPassword())
                 .nickname(employee.getNickname())
-                .employeeType(employee.getEmployeeType())
-                .enterprise(employee.getEnterprise())
+                .employeeType(employeeType)
+                .enterprise(enterprise)
                 .active(employee.getActive())
                 .createDate(employee.getCreateDate())
                 .updateDate(employee.getUpdateDate())
+                .userType(employee.getUserType())
                 .build();
     }
 
-    public List<EmployeeResponse> toResponse(List<Employee> employee) {
-        return employee.stream().map(this::toResponse).collect(Collectors.toList());
-    }
+  
+   
 
 }

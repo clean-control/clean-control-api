@@ -1,3 +1,4 @@
+
 INSERT INTO cleanControl.address (
         street,
         number,
@@ -31,7 +32,32 @@ VALUES (
         NOW(),
         NOW()
     );
-INSERT INTO cleanControl.client (
+
+
+INSERT INTO cleanControl.user_type (
+        name,
+        description,
+        active,
+        create_date,
+        update_date
+    )
+
+VALUES (
+        'Cliente',
+        'Usuário cliente',
+        TRUE,
+        NOW(),
+        NOW()
+    ),
+    (
+        'Empresa',
+        'Usuário empresa',
+        TRUE,
+        NOW(),
+        NOW()
+    );
+
+INSERT INTO cleanControl.users (
         name,
         lastname,
         nickname,
@@ -44,13 +70,14 @@ INSERT INTO cleanControl.client (
         active,
         create_date,
         update_date,
-        address_id
+        address_id,
+        user_type_id
     )
 VALUES (
         'João',
         'Silva',
         'joaos',
-        'joao@example.com',
+        'gmail@gmail.com',
         'senha123',
         '12345678901',
         '11999999999',
@@ -59,23 +86,38 @@ VALUES (
         TRUE,
         NOW(),
         NOW(),
+        1,
         1
     ),
     (
         'Maria',
-        'Oliveira',
-        'mariao',
-        'maria@example.com',
+        'Santos',
+        'marias',
+        'sss@gmail.com',
         'senha123',
         '98765432100',
         '21999999999',
-        '1985-05-05',
+        '1995-05-05',
         'http://example.com/maria.jpg',
         TRUE,
         NOW(),
         NOW(),
+        2,
         2
     );
+
+INSERT INTO cleanControl.client (
+        users_id,
+        create_date,
+        update_date
+    )
+VALUES (
+        1,
+        NOW(),
+        NOW()
+    );
+
+
 INSERT INTO cleanControl.enterprise (
         name,
         cnpj,
@@ -93,7 +135,7 @@ VALUES (
         '12345678000100',
         '1133334444',
         'contato@empresax.com',
-        'senha123',
+        '$2a$10$7.joW9D4QKXvT7EjvDzWqerOlxBGpF7i4BGRVjHkSHT9Zz8mZ1/ni',
         'http://example.com/empresax.jpg',
         TRUE,
         NOW(),
@@ -134,53 +176,21 @@ VALUES (
         NOW()
     );
 INSERT INTO cleanControl.employee (
-        name,
-        lastname,
-        nickname,
-        email,
-        password,
-        cpf,
-        phone,
-        date_birth,
+        users_id,
         employee_type_id,
-        img_url,
-        active,
         create_date,
         update_date,
         enterprise_id
     )
 VALUES (
-        'Carlos',
-        'Pereira',
-        'carlosp',
-        'carlos@example.com',
-        'senha123',
-        '32165498701',
-        '11988888888',
-        '1992-02-02',
+        2,
         1,
-        'http://example.com/carlos.jpg',
-        TRUE,
         NOW(),
         NOW(),
         1
-    ),
-    (
-        'Ana',
-        'Souza',
-        'anas',
-        'ana@example.com',
-        'senha123',
-        '65498732100',
-        '21988888888',
-        '1988-08-08',
-        2,
-        'http://example.com/ana.jpg',
-        TRUE,
-        NOW(),
-        NOW(),
-        2
     );
+
+
 INSERT INTO cleanControl.category (
         name,
         description,
@@ -400,28 +410,6 @@ VALUES (
         NOW(),
         NOW()
     );
-
-INSERT INTO cleanControl.transaction (
-        total,
-        payment_method,
-        transaction_type_id,
-        status,
-        create_date,
-        update_date,
-        enterprise_id,
-        client_id
-    )
-VALUES (
-        500.00,
-        'Cartão de Crédito',
-        1,
-        'Concluída',
-        NOW(),
-        NOW(),
-        1,1
-    ),
-    (300.00, 'Boleto', 1, 'Pendente', NOW(), NOW(), 2,2);
-
 
     INSERT INTO cleanControl.event_type (
         name,
