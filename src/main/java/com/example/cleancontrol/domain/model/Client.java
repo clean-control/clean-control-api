@@ -31,29 +31,11 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
-
-    private String lastname;
-
-    private String nickname;
-
-    private String email;
-
-    private String password;
-
-    private String cpf;
-
-    private String phone;
-
-    private Date dateBirth;
-
-    private String imgUrl;
-
-    private Boolean active;
-
     @ManyToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @JoinColumn(name = "users_id")
+    private Users user;
+
+    
 
     @CreationTimestamp
     private LocalDateTime createDate;
