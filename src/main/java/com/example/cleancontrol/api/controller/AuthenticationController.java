@@ -3,20 +3,16 @@ package com.example.cleancontrol.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cleancontrol.api.dto.userDto.UserLoginDto;
 import com.example.cleancontrol.api.dto.userDto.UserTokenDto;
-import com.example.cleancontrol.api.service.AuthenticationService;
 import com.example.cleancontrol.api.service.UserService;
 
 
 @RestController
-@RequestMapping("/api")
 public class AuthenticationController {
   // @Autowired
   // private AuthenticationService authenticationService;
