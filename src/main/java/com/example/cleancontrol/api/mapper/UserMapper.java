@@ -22,7 +22,7 @@ public class UserMapper {
             // userTokenDto.token(token);
 
 
-            UserTokenDto userTokenDto = new UserTokenDto(user.getId(), user.getName(), user.getEmail(), token);
+            UserTokenDto userTokenDto = new UserTokenDto(user.getId(), user.getEmail(),user.getName(), token);
 
             return userTokenDto;
         }

@@ -57,10 +57,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        System.out.println(username+"username");
-        System.out.println(SecurityContextHolder.getContext().getAuthentication()+"esse trem aqui");
-        System.out.println(request+"o tal do request");
-        System.out.println(response+"O tal do response");
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     addUsernameInContext(request, username, jwtToken);
                 }
@@ -68,7 +64,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
 
             private void addUsernameInContext(HttpServletRequest request, String username, String jwtToken) {
-                System.out.println("AQUI Ó"+username);
                 UserDetails userDetails = authenticationService.loadUserByUsername(username);
 
                 if (jwtTokenManager.validateToken( jwtToken, userDetails)) {
