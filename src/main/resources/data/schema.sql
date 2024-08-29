@@ -283,4 +283,24 @@ CREATE TABLE IF NOT EXISTS cleanControl.file (
     FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE,
     FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE
     );
+
+
+CREATE TABLE IF NOT EXISTS cleanControl.integration_log (
+    id INT NOT NULL AUTO_INCREMENT,
+    description VARCHAR(255),
+    create_date TIMESTAMP NOT NULL,
+    update_date TIMESTAMP NOT NULL,
+    status_code INT,
+    message VARCHAR(3000),
+    class_name VARCHAR(255),
+    method_name VARCHAR(255),
+    url VARCHAR(255),
+    response_body VARCHAR(3000),
+    request_body VARCHAR(3000),
+    method_http VARCHAR(255),
+    entity VARCHAR(255),
+    entity_id INT,
+
+    PRIMARY KEY (id)
+);
 -- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga 

@@ -1,4 +1,4 @@
-package com.example.cleancontrol.api.security;
+package com.example.cleancontrol.security;
 
 import java.util.Collection;
 import java.util.List;
