@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.cleancontrol.api.dto.userDto.UserTokenDto;
 import com.example.cleancontrol.api.dto.userDto.UsersDetailsDto;
 import com.example.cleancontrol.domain.model.Users;
 import com.example.cleancontrol.domain.repository.UserRepository;

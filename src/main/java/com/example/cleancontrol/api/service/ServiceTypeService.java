@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import com.example.cleancontrol.domain.repository.CategoryRepository;
 import com.example.cleancontrol.domain.repository.ServiceTypeRepository;
 import com.example.cleancontrol.domain.model.ServiceType;
-import com.example.cleancontrol.api.mapper.ServiceTypeMapper;
 import com.example.cleancontrol.api.dto.serviceTypeDto.ServiceTypeRequest;
 import java.util.List;
-import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ServiceTypeService {

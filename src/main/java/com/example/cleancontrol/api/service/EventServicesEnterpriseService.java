@@ -1,5 +1,7 @@
 package com.example.cleancontrol.api.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.eventServicesEnterpriseDto.EventServicesEnterpriseRequest;
@@ -9,12 +11,7 @@ import com.example.cleancontrol.domain.repository.EventServicesEnterpriseReposit
 import com.example.cleancontrol.domain.repository.ProductRepository;
 import com.example.cleancontrol.domain.repository.ServicesRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lombok.RequiredArgsConstructor;
-
-import com.example.cleancontrol.api.mapper.EventServicesEnterpriseMapper;
 
 
 @Service
@@ -22,7 +19,6 @@ import com.example.cleancontrol.api.mapper.EventServicesEnterpriseMapper;
 public class EventServicesEnterpriseService {
 
     private final EventServicesEnterpriseRepository eventServicesEnterpriseRepository;
-    private final EventServicesEnterpriseMapper eventServicesEnterpriseMapper;
     private final ProductRepository productRepository;
     private final ServicesRepository servicesRepository;
     private final EventEnterpriseRepository eventEnterpriseRepository;

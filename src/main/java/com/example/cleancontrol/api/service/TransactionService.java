@@ -3,7 +3,6 @@ package com.example.cleancontrol.api.service;
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.domain.model.Transaction;
-import com.example.cleancontrol.api.mapper.TransactionMapper;
 import com.example.cleancontrol.domain.model.Enterprise;
 import com.example.cleancontrol.domain.model.Client;
 import com.example.cleancontrol.domain.model.TransactionType;

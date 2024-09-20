@@ -1,14 +1,14 @@
 package com.example.cleancontrol.api.service;
-import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.couponTypeDto.CouponTypeRequest;
-import com.example.cleancontrol.api.dto.couponTypeDto.CouponTypeResponse;
 import com.example.cleancontrol.api.mapper.CouponTypeMapper;
 import com.example.cleancontrol.domain.model.CouponType;
 import com.example.cleancontrol.domain.repository.CouponTypeRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

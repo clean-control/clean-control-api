@@ -5,12 +5,10 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import com.example.cleancontrol.domain.repository.ServicesRepository;
 import com.example.cleancontrol.domain.model.Services;
-import com.example.cleancontrol.api.mapper.ServicesMapper;
 import com.example.cleancontrol.api.dto.servicesDto.ServicesRequest;
 
 import java.util.List;
 
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor    

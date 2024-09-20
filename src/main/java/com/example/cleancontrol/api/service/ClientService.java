@@ -1,25 +1,22 @@
 package com.example.cleancontrol.api.service;
 
-import lombok.RequiredArgsConstructor;
-
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.clientDto.ClientRequest;
-import com.example.cleancontrol.api.dto.clientDto.ClientResponse;
-import com.example.cleancontrol.api.mapper.ClientMapper;
 import com.example.cleancontrol.domain.model.Address;
 import com.example.cleancontrol.domain.model.Client;
 import com.example.cleancontrol.domain.model.Users;
-import com.example.cleancontrol.domain.model.UserType;
 import com.example.cleancontrol.domain.repository.AddressRepository;
 import com.example.cleancontrol.domain.repository.ClientRepository;
 import com.example.cleancontrol.domain.repository.UserRepository;
 import com.example.cleancontrol.domain.repository.UserTypeRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

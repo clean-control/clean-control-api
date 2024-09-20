@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.domain.model.TransactionType;
 import com.example.cleancontrol.domain.repository.TransactionTypeRepository;
-import com.example.cleancontrol.api.mapper.TransactionTypeMapper;
 
 import com.example.cleancontrol.api.dto.transactionTypeDto.TransactionTypeRequest;
 import lombok.AllArgsConstructor;

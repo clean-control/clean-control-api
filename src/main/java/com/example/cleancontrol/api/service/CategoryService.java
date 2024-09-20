@@ -1,16 +1,15 @@
 package com.example.cleancontrol.api.service;
 
-import lombok.RequiredArgsConstructor;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.example.cleancontrol.api.dto.categoryDto.CategoryResponse;
-import com.example.cleancontrol.api.mapper.CategoryMapper;
 import com.example.cleancontrol.api.dto.categoryDto.CategoryRequest;
+import com.example.cleancontrol.api.mapper.CategoryMapper;
 import com.example.cleancontrol.domain.model.Category;
 import com.example.cleancontrol.domain.repository.CategoryRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

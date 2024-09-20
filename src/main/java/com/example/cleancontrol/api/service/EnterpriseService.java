@@ -1,18 +1,16 @@
 package com.example.cleancontrol.api.service;
 
-import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.enterpriseDto.EnterpriseRequest;
-import com.example.cleancontrol.api.mapper.EnterpriseMapper;
-
-import com.example.cleancontrol.domain.model.Enterprise;
 import com.example.cleancontrol.domain.model.Address;
-
-import com.example.cleancontrol.domain.repository.EnterpriseRepository;
+import com.example.cleancontrol.domain.model.Enterprise;
 import com.example.cleancontrol.domain.repository.AddressRepository;
+import com.example.cleancontrol.domain.repository.EnterpriseRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

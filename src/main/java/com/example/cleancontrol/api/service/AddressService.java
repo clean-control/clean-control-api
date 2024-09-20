@@ -1,12 +1,10 @@
 package com.example.cleancontrol.api.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
-import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
 import com.example.cleancontrol.api.mapper.AddressMapper;
 import com.example.cleancontrol.domain.model.Address;
 import com.example.cleancontrol.domain.repository.AddressRepository;

@@ -8,13 +8,11 @@ import com.example.cleancontrol.domain.repository.CategoryRepository;
 import com.example.cleancontrol.domain.repository.ProductTypeRepository;
 
 import com.example.cleancontrol.domain.model.ProductType;
-import com.example.cleancontrol.api.mapper.ProductTypeMapper;
 import com.example.cleancontrol.api.dto.productTypeDto.ProductTypeRecord;
 
 
 import java.util.List;
 
-import java.util.stream.Collectors;
 
 
 @Service

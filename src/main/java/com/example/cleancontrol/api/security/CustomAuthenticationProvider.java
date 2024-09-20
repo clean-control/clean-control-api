@@ -1,14 +1,14 @@
 package com.example.cleancontrol.api.security;
 
-import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.example.cleancontrol.api.service.AuthenticationService;
-import org.springframework.security.authentication.AuthenticationProvider;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 

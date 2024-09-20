@@ -1,17 +1,12 @@
 package com.example.cleancontrol.api.service;
 
-import org.springframework.stereotype.Service;
-
-
-import com.example.cleancontrol.api.dto.eventTypeDto.EventTypeRequest;
-
-import com.example.cleancontrol.domain.model.EventType;
-
-import com.example.cleancontrol.domain.repository.EventTypeRepository;
-import com.example.cleancontrol.api.mapper.EventTypeMapper;
 import java.util.List;
 
-import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
+
+import com.example.cleancontrol.api.dto.eventTypeDto.EventTypeRequest;
+import com.example.cleancontrol.domain.model.EventType;
+import com.example.cleancontrol.domain.repository.EventTypeRepository;
 
 import lombok.RequiredArgsConstructor;
 
