@@ -20,11 +20,11 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
 
-    public List<AddressResponse> getAllAddress() {
+    public List<Address> getAllAddress() {
         try {
             List<Address> address = addressRepository.findAll();
 
-            return address.stream().map(addressMapper::toResponse).collect(Collectors.toList());
+            return address;
 
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar Address");
@@ -32,20 +32,20 @@ public class AddressService {
 
     }
 
-    public AddressResponse getAddressById(Integer id) {
+    public Address getAddressById(Integer id) {
         try {
             if (id == null) {
                 throw new NullPointerException();
             }
 
             Address address = addressRepository.findById(id).orElseThrow();
-            return addressMapper.toResponse(address);
+            return address;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar categorias");
         }
     }
 
-    public AddressResponse saveAddress(AddressRequest data) {
+    public Address saveAddress(AddressRequest data) {
         try {
 
             if (data == null) {
@@ -56,13 +56,13 @@ public class AddressService {
 
             addressRepository.save(address);
 
-            return addressMapper.toResponse(address);
+            return address;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao salvar o endereço");
         }
     }
 
-    public AddressResponse updateAddress(Integer id, AddressRequest data) {
+    public Address updateAddress(Integer id, AddressRequest data) {
         try {
 
             if (id == null || data == null) {
@@ -87,7 +87,7 @@ public class AddressService {
                     .createDate(address.getCreateDate())
                     .build();
 
-            return addressMapper.toResponse(addressRepository.save(newAddress));
+            return  newAddress;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao atualizar o endereço");
             

@@ -26,7 +26,6 @@ import com.example.cleancontrol.domain.repository.UserTypeRepository;
 public class ClientService {
 
     private final ClientRepository clientRepository;
-    private final ClientMapper clientMapper;
     private final AddressRepository addressRepository;
     private final UserRepository userRepository;
     private final UserTypeRepository userTypeRepository;
@@ -34,12 +33,12 @@ public class ClientService {
         @Autowired
     PasswordEncoder passwordEncoder;
 
-    public List<ClientResponse> findAll() {
+    public List<Client> findAll() {
 
         try {
             List<Client> clients = clientRepository.findAll();
 
-            List<ClientResponse> lstClient = new ArrayList<ClientResponse>();
+            List<Client> lstClient = new ArrayList<Client>();
 
             for (Client client : clients) {
                
@@ -47,7 +46,7 @@ public class ClientService {
 
                 System.out.println(client.getUser());
                 System.out.println(client.getId());
-                lstClient.add(clientMapper.toResponse(client.getUser()));
+                lstClient.add(client);
                 
                }
 
@@ -60,20 +59,20 @@ public class ClientService {
         }
     }
 
-    public ClientResponse findById(Integer id) {
+    public Client findById(Integer id) {
         try {
             if (id == null) {
                 throw new NullPointerException();
             }
 
             Client client = clientRepository.findById(id).orElseThrow();
-            return clientMapper.toResponse(client.getUser());
+            return client;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar clientes: " + e.getMessage());
         }
     }
 
-    public ClientResponse save(ClientRequest data) {
+    public Client save(ClientRequest data) {
         try {
 
             if (data == null) {
@@ -108,7 +107,7 @@ public class ClientService {
 
             clientRepository.save(client);
 
-            return clientMapper.toResponse(client.getUser());
+            return client;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao salvar cliente: " + e.getMessage());
         }
@@ -151,7 +150,7 @@ public class ClientService {
         }
     }
 
-    public ClientResponse update(Integer id, ClientRequest data) {
+    public Client update(Integer id, ClientRequest data) {
 
         try {
             if (id == null || data == null) {
@@ -175,7 +174,7 @@ Address address = addressRepository.findById(id).orElseThrow();
 
             clientRepository.save(client);
 
-            return clientMapper.toResponse(client.getUser());
+            return client;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao atualizar cliente");
         }

@@ -7,7 +7,6 @@ import com.example.cleancontrol.domain.repository.ServicesRepository;
 import com.example.cleancontrol.domain.model.Services;
 import com.example.cleancontrol.api.mapper.ServicesMapper;
 import com.example.cleancontrol.api.dto.servicesDto.ServicesRequest;
-import com.example.cleancontrol.api.dto.servicesDto.ServicesResponse;
 
 import java.util.List;
 
@@ -18,19 +17,18 @@ import java.util.stream.Collectors;
 public class ServicesService {
 
     private final ServicesRepository servicesRepository;
-    private final ServicesMapper servicesMapper;
 
-    public List<ServicesResponse> findAll() {
+    public List<Services> findAll() {
         List<Services> servicess = servicesRepository.findAll();
-        return servicess.stream().map(servicesMapper::toResponse).collect(Collectors.toList());
+        return servicess;
     }
 
-    public ServicesResponse findById(Integer id) {
+    public Services findById(Integer id) {
         Services services = servicesRepository.findById(id).orElseThrow();
-        return servicesMapper.toResponse(services);
+        return services;
     }
 
-    public ServicesResponse save(ServicesRequest servicesRequest) {
+    public Services save(ServicesRequest servicesRequest) {
         Services services = new Services();
         services.setName(servicesRequest.name());
         services.setDescription(servicesRequest.description());
@@ -38,10 +36,10 @@ public class ServicesService {
         services.setImgUrl(servicesRequest.imgUrl());
         services.setActive(servicesRequest.active());
         services = servicesRepository.save(services);
-        return servicesMapper.toResponse(services);
+        return services;
     }
 
-    public ServicesResponse update(Integer id, ServicesRequest servicesRequest) {
+    public Services update(Integer id, ServicesRequest servicesRequest) {
         Services services = servicesRepository.findById(id).orElseThrow();
         services.setName(servicesRequest.name());
         services.setDescription(servicesRequest.description());
@@ -49,7 +47,7 @@ public class ServicesService {
         services.setImgUrl(servicesRequest.imgUrl());
         services.setActive(servicesRequest.active());
         services = servicesRepository.save(services);
-        return servicesMapper.toResponse(services);
+        return services;
     }
 
     public void delete(Integer id) {

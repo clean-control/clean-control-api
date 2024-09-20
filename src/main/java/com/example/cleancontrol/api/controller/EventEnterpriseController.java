@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.cleancontrol.api.dto.eventEnterpriseDto.EventEnterpriseRequest;
 import com.example.cleancontrol.api.dto.eventEnterpriseDto.EventEnterpriseResponse;
-
+import com.example.cleancontrol.api.mapper.EventEnterpriseMapper;
 import com.example.cleancontrol.api.service.EventEnterpriseService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,25 +26,26 @@ import java.util.List;
 public class EventEnterpriseController {
 
     private final EventEnterpriseService eventEnterpriseService ;
+    private final EventEnterpriseMapper eventEnterpriseMapper;
 
     @PostMapping
     public ResponseEntity<EventEnterpriseResponse> save(@RequestBody EventEnterpriseRequest eventEnterpriseRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventEnterpriseService.save(eventEnterpriseRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventEnterpriseMapper.toResponse(eventEnterpriseService.save(eventEnterpriseRequest)));
     }
 
     @GetMapping
     public ResponseEntity<List<EventEnterpriseResponse>> findAll() {
-        return ResponseEntity.ok(eventEnterpriseService.findAll());
+        return ResponseEntity.ok(eventEnterpriseService.findAll().stream().map(eventEnterpriseMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EventEnterpriseResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(eventEnterpriseService.findById(id));
+        return ResponseEntity.ok(eventEnterpriseMapper.toResponse(eventEnterpriseService.findById(id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EventEnterpriseResponse> update(@PathVariable Integer id, @RequestBody EventEnterpriseRequest eventEnterpriseRequest) {
-        return ResponseEntity.ok(eventEnterpriseService.update(id, eventEnterpriseRequest));
+        return ResponseEntity.ok(eventEnterpriseMapper.toResponse(eventEnterpriseService.update(id, eventEnterpriseRequest)));
     }
 
     @DeleteMapping("/{id}")

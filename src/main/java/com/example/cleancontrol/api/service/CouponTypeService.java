@@ -17,35 +17,35 @@ public class CouponTypeService {
     private final CouponTypeRepository couponTypeRepository;
     private final CouponTypeMapper couponTypeMapper;
 
-    public List<CouponTypeResponse> findAll() {
+    public List<CouponType> findAll() {
         try {
-            return couponTypeMapper.toResponse(couponTypeRepository.findAll());
+            return couponTypeRepository.findAll();
         } catch (Exception e) {
             throw new RuntimeException("Error to get coupon types");
         }
     }
 
-    public CouponTypeResponse findById(Integer id) {
+    public CouponType findById(Integer id) {
         try {
-            return couponTypeMapper.toResponse(couponTypeRepository.findById(id).get());
+            return couponTypeRepository.findById(id).get();
         } catch (Exception e) {
             throw new RuntimeException("Error to get coupon type");
         }
     }
 
-    public CouponTypeResponse save(CouponTypeRequest couponTypeRequest) {
+    public CouponType save(CouponTypeRequest couponTypeRequest) {
         try {
             CouponType couponType = couponTypeMapper.toEntity(couponTypeRequest);
-            return couponTypeMapper.toResponse(couponTypeRepository.save(couponType));
+            return couponTypeRepository.save(couponType);
         } catch (Exception e) {
             throw new RuntimeException("Error to save coupon type");
         }
     }
 
-    public CouponTypeResponse update(Integer id, CouponTypeRequest couponTypeRequest) {
+    public CouponType update(Integer id, CouponTypeRequest couponTypeRequest) {
         try {
             CouponType couponType = couponTypeMapper.toEntity(id, couponTypeRequest);
-            return couponTypeMapper.toResponse(couponTypeRepository.save(couponType));
+            return couponTypeRepository.save(couponType);
         } catch (Exception e) {
             throw new RuntimeException("Error to update coupon type");
         }
