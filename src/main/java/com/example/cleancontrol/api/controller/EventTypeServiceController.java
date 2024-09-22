@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.cleancontrol.api.dto.eventTypeDto.EventTypeRequest;
 import com.example.cleancontrol.api.dto.eventTypeDto.EventTypeResponse;
-
+import com.example.cleancontrol.api.mapper.EventTypeMapper;
 import com.example.cleancontrol.api.service.EventTypeService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,25 +26,26 @@ import java.util.List;
 public class EventTypeServiceController {
 
     private final EventTypeService eventTypeService ;
+    private final EventTypeMapper eventTypeMapper;
 
     @PostMapping
     public ResponseEntity<EventTypeResponse> save(@RequestBody EventTypeRequest eventTypeRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventTypeService.save(eventTypeRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventTypeMapper.toResponse(eventTypeService.save(eventTypeRequest)));
     }
 
     @GetMapping
     public ResponseEntity<List<EventTypeResponse>> findAll() {
-        return ResponseEntity.ok(eventTypeService.findAll());
+        return ResponseEntity.ok(eventTypeService.findAll().stream().map(eventTypeMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EventTypeResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(eventTypeService.findById(id));
+        return ResponseEntity.ok(eventTypeMapper.toResponse(eventTypeService.findById(id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EventTypeResponse> update(@PathVariable Integer id, @RequestBody EventTypeRequest eventTypeRequest) {
-        return ResponseEntity.ok(eventTypeService.update(id, eventTypeRequest));
+        return ResponseEntity.ok(eventTypeMapper.toResponse(eventTypeService.update(id, eventTypeRequest)));
     }
 
     @DeleteMapping("/{id}")

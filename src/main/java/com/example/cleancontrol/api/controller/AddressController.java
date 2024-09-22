@@ -1,6 +1,7 @@
 package com.example.cleancontrol.api.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
 import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
+import com.example.cleancontrol.api.mapper.AddressMapper;
 import com.example.cleancontrol.api.service.AddressService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,12 +26,13 @@ import lombok.RequiredArgsConstructor;
 public class AddressController {
 
     private final AddressService addressService;
+    private final AddressMapper addressMapper;
 
     @GetMapping
     public ResponseEntity<List<AddressResponse>> getAllAddress() {
 
         try {
-            List<AddressResponse> address = addressService.getAllAddress();
+            List<AddressResponse> address =  addressService.getAllAddress().stream().map(addressMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(address);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -42,7 +45,7 @@ public class AddressController {
     public ResponseEntity<AddressResponse> getAddressById(@PathVariable Integer id) {
 
         try {
-            AddressResponse address = addressService.getAddressById(id);
+            AddressResponse address =addressMapper.toResponse( addressService.getAddressById(id));
             return ResponseEntity.ok(address);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -54,7 +57,7 @@ public class AddressController {
     public ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest data) {
 
         try {
-            AddressResponse address = addressService.saveAddress(data);
+            AddressResponse address = addressMapper.toResponse( addressService.saveAddress(data));
             return ResponseEntity.ok(address);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -66,7 +69,7 @@ public class AddressController {
     public ResponseEntity<AddressResponse> updateAddress(@PathVariable Integer id, @RequestBody AddressRequest data) {
 
         try {
-            AddressResponse address = addressService.updateAddress(id, data);
+            AddressResponse address =addressMapper.toResponse( addressService.updateAddress(id, data));
             return ResponseEntity.ok(address);
         } catch (Exception e) {
             System.out.println(e.getMessage());

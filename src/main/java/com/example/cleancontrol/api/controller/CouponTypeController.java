@@ -1,5 +1,6 @@
 package com.example.cleancontrol.api.controller;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.cleancontrol.api.service.CouponTypeService;
 
 import com.example.cleancontrol.api.dto.couponTypeDto.*;
+import com.example.cleancontrol.api.mapper.CouponTypeMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,12 +25,13 @@ import lombok.RequiredArgsConstructor;
 public class CouponTypeController {
 
     private final CouponTypeService couponTypeService;
+    private final CouponTypeMapper couponTypeMapper;
 
     @GetMapping
     public ResponseEntity<List<CouponTypeResponse>> getAllCouponType(){
 
           try {
-            List<CouponTypeResponse> couponType = couponTypeService.findAll();
+            List<CouponTypeResponse> couponType = couponTypeService.findAll().stream().map(couponTypeMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -39,7 +42,7 @@ public class CouponTypeController {
     @GetMapping("/{id}")
     public ResponseEntity<CouponTypeResponse> getCouponType(@PathVariable Integer id){
         try {
-            CouponTypeResponse couponType = couponTypeService.findById(id);
+            CouponTypeResponse couponType = couponTypeMapper.toResponse(couponTypeService.findById(id));
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -50,7 +53,7 @@ public class CouponTypeController {
     @PostMapping
     public ResponseEntity<CouponTypeResponse> saveCouponType(@RequestBody CouponTypeRequest data){
         try {
-            CouponTypeResponse couponType = couponTypeService.save(data);
+            CouponTypeResponse couponType = couponTypeMapper.toResponse(couponTypeService.save(data));
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -61,7 +64,7 @@ public class CouponTypeController {
     @PutMapping("/{id}")
     public ResponseEntity<CouponTypeResponse> updateCouponType(@PathVariable Integer id, @RequestBody CouponTypeRequest data){
         try {
-            CouponTypeResponse couponType = couponTypeService.update(id, data);
+            CouponTypeResponse couponType =couponTypeMapper.toResponse( couponTypeService.update(id, data));
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
             System.out.println(e.getMessage());

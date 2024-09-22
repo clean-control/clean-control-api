@@ -1,5 +1,6 @@
 package com.example.cleancontrol.api.controller;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cleancontrol.api.service.CategoryService;
 import com.example.cleancontrol.api.dto.categoryDto.*;
+import com.example.cleancontrol.api.mapper.CategoryMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,12 +24,13 @@ import lombok.RequiredArgsConstructor;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final CategoryMapper categoryMapper;
 
     @GetMapping
     public ResponseEntity<List<CategoryResponse>> getAllCategory(){
 
           try {
-            List<CategoryResponse> category = categoryService.findAll();
+            List<CategoryResponse> category = categoryService.findAll().stream().map(categoryMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(category);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -38,7 +41,7 @@ public class CategoryController {
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> getCategory(@PathVariable Integer id){
         try {
-            CategoryResponse category = categoryService.findById(id);
+            CategoryResponse category = categoryMapper.toResponse(categoryService.findById(id));
             return ResponseEntity.ok(category);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -62,7 +65,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryResponse> save(@RequestBody CategoryRequest data){
         try {
-            CategoryResponse category = categoryService.save(data);
+            CategoryResponse category = categoryMapper.toResponse(categoryService.save(data));
             return ResponseEntity.status(201).body(category);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -74,7 +77,7 @@ public class CategoryController {
     @PutMapping("/{id}")
     public ResponseEntity<CategoryResponse> update(@PathVariable Integer id, @RequestBody CategoryRequest data){
         try {
-            CategoryResponse category = categoryService.update(id, data);
+            CategoryResponse category = categoryMapper.toResponse(categoryService.update(id, data));
 
             return ResponseEntity.ok(category);
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.example.cleancontrol.api.controller;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.cleancontrol.api.service.EmployeeService;
 
 import com.example.cleancontrol.api.dto.employeeDto.*;
+import com.example.cleancontrol.api.mapper.EmployeeMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,12 +25,13 @@ import lombok.RequiredArgsConstructor;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final EmployeeMapper employeeMapper;
 
     @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getAllEmployee(){
 
           try {
-            List<EmployeeResponse> employee = employeeService.findAll();
+            List<EmployeeResponse> employee = employeeService.findAll().stream().map(employeeMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -39,7 +42,7 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeResponse> getEmployee(@PathVariable Integer id){
         try {
-            EmployeeResponse employee = employeeService.findById(id);
+            EmployeeResponse employee = employeeMapper.toResponse(employeeService.findById(id));
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -50,7 +53,7 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<EmployeeResponse> saveEmployee(@RequestBody EmployeeRequest data){
         try {
-            EmployeeResponse employee = employeeService.save(data);
+            EmployeeResponse employee = employeeMapper.toResponse(employeeService.save(data));
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -61,7 +64,7 @@ public class EmployeeController {
     @PutMapping("/{id}")
     public ResponseEntity<EmployeeResponse> updateEmployee(@PathVariable Integer id, @RequestBody EmployeeRequest data){
         try {
-            EmployeeResponse employee = employeeService.update(id, data);
+            EmployeeResponse employee = employeeMapper.toResponse(employeeService.update(id, data));
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -1,7 +1,6 @@
 package com.example.cleancontrol.domain.model;
 
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 

@@ -1,16 +1,15 @@
 package com.example.cleancontrol.api.service;
 
-import lombok.RequiredArgsConstructor;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.example.cleancontrol.api.dto.categoryDto.CategoryResponse;
-import com.example.cleancontrol.api.mapper.CategoryMapper;
 import com.example.cleancontrol.api.dto.categoryDto.CategoryRequest;
+import com.example.cleancontrol.api.mapper.CategoryMapper;
 import com.example.cleancontrol.domain.model.Category;
 import com.example.cleancontrol.domain.repository.CategoryRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -19,32 +18,32 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryMapper CategoryMapper;
 
-    public List<CategoryResponse> findAll() {
+    public List<Category> findAll() {
 
         try {
             List<Category> categories = categoryRepository.findAll();
 
-            return categories.stream().map(CategoryMapper::toResponse).collect(Collectors.toList());
+            return categories;
 
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar categorias");
         }
     }
 
-    public CategoryResponse findById(Integer id) {
+    public Category findById(Integer id) {
         try {
             if (id == null) {
                 throw new NullPointerException();
             }
 
             Category category = categoryRepository.findById(id).orElseThrow();
-            return CategoryMapper.toResponse(category);
+            return category;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar categorias");
         }
     }
 
-    public CategoryResponse save(CategoryRequest data) {
+    public Category save(CategoryRequest data) {
         try {
 
             if (data == null) {
@@ -55,13 +54,13 @@ public class CategoryService {
 
             categoryRepository.save(category);
 
-            return CategoryMapper.toResponse(category);
+            return category;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao salvar categoria");
         }
     }
 
-    public CategoryResponse update(Integer id, CategoryRequest data) {
+    public Category update(Integer id, CategoryRequest data) {
 
         try {
             if (id == null || data == null) {
@@ -76,7 +75,7 @@ public class CategoryService {
 
             categoryRepository.save(category);
 
-            return CategoryMapper.toResponse(category);
+            return category;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao atualizar categoria");
         }

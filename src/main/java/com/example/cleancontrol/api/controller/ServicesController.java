@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.cleancontrol.api.dto.servicesDto.ServicesRequest;
 import com.example.cleancontrol.api.dto.servicesDto.ServicesResponse;
-
+import com.example.cleancontrol.api.mapper.ServicesMapper;
 import com.example.cleancontrol.api.service.ServicesService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,25 +26,26 @@ import java.util.List;
 public class ServicesController {
 
     private final ServicesService servicesService ;
+    private final ServicesMapper servicesMapper;
 
     @PostMapping
     public ResponseEntity<ServicesResponse> save(@RequestBody ServicesRequest servicesRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicesService.save(servicesRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicesMapper.toResponse(servicesService.save(servicesRequest)));
     }
 
     @GetMapping
     public ResponseEntity<List<ServicesResponse>> findAll() {
-        return ResponseEntity.ok(servicesService.findAll());
+        return ResponseEntity.ok(servicesService.findAll().stream().map(servicesMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ServicesResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(servicesService.findById(id));
+        return ResponseEntity.ok(servicesMapper.toResponse(servicesService.findById(id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ServicesResponse> update(@PathVariable Integer id, @RequestBody ServicesRequest servicesRequest) {
-        return ResponseEntity.ok(servicesService.update(id, servicesRequest));
+        return ResponseEntity.ok(servicesMapper.toResponse(servicesService.update(id, servicesRequest)));
     }
 
     @DeleteMapping("/{id}")

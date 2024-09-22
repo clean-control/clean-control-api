@@ -1,19 +1,16 @@
 package com.example.cleancontrol.api.service;
 
-import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.enterpriseDto.EnterpriseRequest;
-import com.example.cleancontrol.api.dto.enterpriseDto.EnterpriseResponse;
-import com.example.cleancontrol.api.mapper.EnterpriseMapper;
-
-import com.example.cleancontrol.domain.model.Enterprise;
 import com.example.cleancontrol.domain.model.Address;
-
-import com.example.cleancontrol.domain.repository.EnterpriseRepository;
+import com.example.cleancontrol.domain.model.Enterprise;
 import com.example.cleancontrol.domain.repository.AddressRepository;
+import com.example.cleancontrol.domain.repository.EnterpriseRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -21,25 +18,24 @@ public class EnterpriseService {
 
     private final EnterpriseRepository enterpriseRepository;
     private final AddressRepository addressRepository;
-    private final EnterpriseMapper enterpriseMapper;
 
-    public List<EnterpriseResponse> findAll() {
+    public List<Enterprise> findAll() {
         try {
-            return enterpriseMapper.toResponse(enterpriseRepository.findAll());
+            return enterpriseRepository.findAll();
         } catch (Exception e) {
             throw new RuntimeException("Error to get enterprises");
         }
     }
 
-    public EnterpriseResponse findById(Integer id) {
+    public Enterprise findById(Integer id) {
         try {
-            return enterpriseMapper.toResponse(enterpriseRepository.findById(id).get());
+            return enterpriseRepository.findById(id).get();
         } catch (Exception e) {
             throw new RuntimeException("Error to get enterprise");
         }
     }
 
-    public EnterpriseResponse save(EnterpriseRequest enterpriseRequest) {
+    public Enterprise save(EnterpriseRequest enterpriseRequest) {
         try {
 
             if (enterpriseRequest == null) {
@@ -59,14 +55,14 @@ public class EnterpriseService {
                     .address(address)
                     .build();
 
-            return enterpriseMapper.toResponse(enterpriseRepository.save(enterprise));
+            return enterpriseRepository.save(enterprise);
 
         } catch (Exception e) {
             throw new RuntimeException("Error to get address");
         }
     }
 
-    public EnterpriseResponse update(Integer id, EnterpriseRequest enterpriseRequest) {
+    public Enterprise update(Integer id, EnterpriseRequest enterpriseRequest) {
         try {
             Enterprise enterprise = enterpriseRepository.findById(id).get();
 
@@ -85,7 +81,7 @@ public class EnterpriseService {
             enterprise.setActive(enterpriseRequest.active() != null ? enterpriseRequest.active() : enterprise.getActive());
             enterprise.setAddress(address);
 
-            return enterpriseMapper.toResponse(enterpriseRepository.save(enterprise));
+            return enterpriseRepository.save(enterprise);
         } catch (Exception e) {
             throw new RuntimeException("Error to update enterprise");
         }

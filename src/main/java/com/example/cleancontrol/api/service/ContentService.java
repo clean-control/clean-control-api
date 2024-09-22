@@ -38,7 +38,6 @@ public class ContentService {
             }
             String fileDownloadUri = fileService.upload(file);
 
-
             Content fileResponse = Content.builder()
                     .name(file.getOriginalFilename())
                     .path(fileDownloadUri)
