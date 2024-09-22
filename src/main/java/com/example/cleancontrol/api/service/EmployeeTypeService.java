@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.employeeTypeDto.EmployeeTypeRequest;
-import com.example.cleancontrol.api.dto.employeeTypeDto.EmployeeTypeResponse;
 import com.example.cleancontrol.api.mapper.EmployeeTypeMapper;
 
 import com.example.cleancontrol.domain.model.EmployeeType;
@@ -18,32 +17,32 @@ public class EmployeeTypeService {
     private final EmployeeTypeRepository employeeTypeRepository;
     private final EmployeeTypeMapper employeeTypeMapper;
 
-    public List<EmployeeTypeResponse> findAll() {
+    public List<EmployeeType> findAll() {
         try {
-            return employeeTypeMapper.toResponse(employeeTypeRepository.findAll());
+            return employeeTypeRepository.findAll();
         } catch (Exception e) {
             throw new RuntimeException("Error to get employee types");
         }
     }
 
-    public EmployeeTypeResponse findById(Integer id) {
+    public EmployeeType findById(Integer id) {
         try {
-            return employeeTypeMapper.toResponse(employeeTypeRepository.findById(id).get());
+            return employeeTypeRepository.findById(id).get();
         } catch (Exception e) {
             throw new RuntimeException("Error to get employee type");
         }
     }
 
-    public EmployeeTypeResponse save(EmployeeTypeRequest employeeTypeRequest) {
+    public EmployeeType save(EmployeeTypeRequest employeeTypeRequest) {
         try {
             EmployeeType employeeType = employeeTypeMapper.toEntity(employeeTypeRequest);
-            return employeeTypeMapper.toResponse(employeeTypeRepository.save(employeeType));
+            return employeeTypeRepository.save(employeeType);
         } catch (Exception e) {
             throw new RuntimeException("Error to save employee type");
         }
     }
 
-    public EmployeeTypeResponse update(Integer id, EmployeeTypeRequest employeeTypeRequest) {
+    public EmployeeType update(Integer id, EmployeeTypeRequest employeeTypeRequest) {
         try {
             EmployeeType employeeType = employeeTypeRepository.findById(id).orElseThrow();
 
@@ -51,7 +50,7 @@ public class EmployeeTypeService {
             employeeType.setDescription(employeeTypeRequest.description()!=null?employeeTypeRequest.description():employeeType.getDescription());
             employeeType.setName(employeeTypeRequest.name()!=null?employeeTypeRequest.name():employeeType.getName());
 
-            return employeeTypeMapper.toResponse(employeeTypeRepository.save(employeeType));
+            return employeeTypeRepository.save(employeeType);
         } catch (Exception e) {
             throw new RuntimeException("Error to update employee type");
         }

@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.cleancontrol.api.dto.serviceTypeDto.ServiceTypeRequest;
 import com.example.cleancontrol.api.dto.serviceTypeDto.ServiceTypeResponse;
-
+import com.example.cleancontrol.api.mapper.ServiceTypeMapper;
 import com.example.cleancontrol.api.service.ServiceTypeService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,25 +25,26 @@ import java.util.List;
 public class ServiceTypeController {
 
     private final ServiceTypeService serviceTypeService ;
+    private final ServiceTypeMapper serviceTypeMapper;
 
     @PostMapping
     public ResponseEntity<ServiceTypeResponse> save(@RequestBody ServiceTypeRequest serviceTypeRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(serviceTypeService.save(serviceTypeRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(serviceTypeMapper.toResponse(serviceTypeService.save(serviceTypeRequest)));
     }
 
     @GetMapping
     public ResponseEntity<List<ServiceTypeResponse>> findAll() {
-        return ResponseEntity.ok(serviceTypeService.findAll());
+        return ResponseEntity.ok(serviceTypeService.findAll().stream().map(serviceTypeMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ServiceTypeResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(serviceTypeService.findById(id));
+        return ResponseEntity.ok(serviceTypeMapper.toResponse(serviceTypeService.findById(id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ServiceTypeResponse> update(@PathVariable Integer id, @RequestBody ServiceTypeRequest serviceTypeRequest) {
-        return ResponseEntity.ok(serviceTypeService.update(id, serviceTypeRequest));
+        return ResponseEntity.ok(serviceTypeMapper.toResponse(serviceTypeService.update(id, serviceTypeRequest)));
     }
 
     @DeleteMapping("/{id}")

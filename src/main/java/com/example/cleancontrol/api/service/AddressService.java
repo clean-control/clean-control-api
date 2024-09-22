@@ -1,12 +1,10 @@
 package com.example.cleancontrol.api.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
-import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
 import com.example.cleancontrol.api.mapper.AddressMapper;
 import com.example.cleancontrol.domain.model.Address;
 import com.example.cleancontrol.domain.repository.AddressRepository;
@@ -20,11 +18,11 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
 
-    public List<AddressResponse> getAllAddress() {
+    public List<Address> getAllAddress() {
         try {
             List<Address> address = addressRepository.findAll();
 
-            return address.stream().map(addressMapper::toResponse).collect(Collectors.toList());
+            return address;
 
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar Address");
@@ -32,20 +30,20 @@ public class AddressService {
 
     }
 
-    public AddressResponse getAddressById(Integer id) {
+    public Address getAddressById(Integer id) {
         try {
             if (id == null) {
                 throw new NullPointerException();
             }
 
             Address address = addressRepository.findById(id).orElseThrow();
-            return addressMapper.toResponse(address);
+            return address;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar categorias");
         }
     }
 
-    public AddressResponse saveAddress(AddressRequest data) {
+    public Address saveAddress(AddressRequest data) {
         try {
 
             if (data == null) {
@@ -56,13 +54,13 @@ public class AddressService {
 
             addressRepository.save(address);
 
-            return addressMapper.toResponse(address);
+            return address;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao salvar o endereço");
         }
     }
 
-    public AddressResponse updateAddress(Integer id, AddressRequest data) {
+    public Address updateAddress(Integer id, AddressRequest data) {
         try {
 
             if (id == null || data == null) {
@@ -87,7 +85,7 @@ public class AddressService {
                     .createDate(address.getCreateDate())
                     .build();
 
-            return addressMapper.toResponse(addressRepository.save(newAddress));
+            return  newAddress;
         } catch (Exception e) {
             throw new RuntimeException("Erro ao atualizar o endereço");
             

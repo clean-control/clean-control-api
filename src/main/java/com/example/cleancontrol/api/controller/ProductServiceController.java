@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.cleancontrol.api.dto.productDto.ProductRequest;
 import com.example.cleancontrol.api.dto.productDto.ProductResponse;
-
+import com.example.cleancontrol.api.mapper.ProductMapper;
 import com.example.cleancontrol.api.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,25 +26,26 @@ import java.util.List;
 public class ProductServiceController {
 
     private final ProductService productService ;
+    private final ProductMapper productMapper;
 
     @PostMapping
     public ResponseEntity<ProductResponse> save(@RequestBody ProductRequest productRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productMapper.toResponse(productService.save(productRequest)));
     }
 
     @GetMapping
     public ResponseEntity<List<ProductResponse>> findAll() {
-        return ResponseEntity.ok(productService.findAll());
+        return ResponseEntity.ok(productService.findAll().stream().map(productMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(productService.findById(id));
+        return ResponseEntity.ok(productMapper.toResponse(productService.findById(id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponse> update(@PathVariable Integer id, @RequestBody ProductRequest productRequest) {
-        return ResponseEntity.ok(productService.update(id, productRequest));
+        return ResponseEntity.ok(productMapper.toResponse(productService.update(id, productRequest)));
     }
 
     @DeleteMapping("/{id}")

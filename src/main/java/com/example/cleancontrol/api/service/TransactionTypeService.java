@@ -4,10 +4,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.domain.model.TransactionType;
 import com.example.cleancontrol.domain.repository.TransactionTypeRepository;
-import com.example.cleancontrol.api.mapper.TransactionTypeMapper;
 
 import com.example.cleancontrol.api.dto.transactionTypeDto.TransactionTypeRequest;
-import com.example.cleancontrol.api.dto.transactionTypeDto.TransactionTypeResponse;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -17,9 +15,8 @@ import java.util.List;
 public class TransactionTypeService {
 
     private final TransactionTypeRepository transactionTypeRepository;
-    private final TransactionTypeMapper transactionTypeMapper;
 
-    public TransactionTypeResponse save(TransactionTypeRequest transactionTypeRequest) {
+    public TransactionType save(TransactionTypeRequest transactionTypeRequest) {
         TransactionType transactionType = new TransactionType();
 
         transactionType.setName(transactionTypeRequest.name());
@@ -28,22 +25,22 @@ public class TransactionTypeService {
 
         TransactionType savedTransactionType = transactionTypeRepository.save(transactionType);
 
-        return transactionTypeMapper.toResponse(savedTransactionType);
+        return savedTransactionType;
 
     }
 
-    public List<TransactionTypeResponse> findAll() {
+    public List<TransactionType> findAll() {
         List<TransactionType> transactionTypes = transactionTypeRepository.findAll();
-        return transactionTypeMapper.toResponse(transactionTypes);
+        return transactionTypes;
     }
 
-    public TransactionTypeResponse findById(Integer id) {
+    public TransactionType findById(Integer id) {
         TransactionType transactionType = transactionTypeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("TransactionType not found"));
-        return transactionTypeMapper.toResponse(transactionType);
+        return transactionType;
     }
 
-    public TransactionTypeResponse update(Integer id, TransactionTypeRequest transactionTypeRequest) {
+    public TransactionType update(Integer id, TransactionTypeRequest transactionTypeRequest) {
         TransactionType transactionType = transactionTypeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("TransactionType not found"));
 
@@ -53,7 +50,7 @@ public class TransactionTypeService {
 
         TransactionType updatedTransactionType = transactionTypeRepository.save(transactionType);
 
-        return transactionTypeMapper.toResponse(updatedTransactionType);
+        return updatedTransactionType;
     }
 
     public void delete(Integer id) {

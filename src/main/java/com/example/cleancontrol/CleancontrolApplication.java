@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
 public class CleancontrolApplication {

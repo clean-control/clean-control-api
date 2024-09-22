@@ -1,45 +1,43 @@
 package com.example.cleancontrol.api.service;
-import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.couponDto.CouponRequest;
-import com.example.cleancontrol.api.dto.couponDto.CouponResponse;
-import com.example.cleancontrol.api.mapper.CouponMapper;
 import com.example.cleancontrol.domain.model.Coupon;
 import com.example.cleancontrol.domain.model.Enterprise;
 import com.example.cleancontrol.domain.repository.CouponRepository;
 import com.example.cleancontrol.domain.repository.CouponTypeRepository;
 import com.example.cleancontrol.domain.repository.EnterpriseRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class CouponService {
 
     private final CouponRepository couponRepository;
-    private final CouponMapper couponMapper;
     private final EnterpriseRepository enterpriseRepository;
     private final CouponTypeRepository couponTypeRepository;
 
-    public List<CouponResponse> findAll() {
+    public List<Coupon> findAll() {
         try {
-            return couponMapper.toResponse(couponRepository.findAll());
+            return couponRepository.findAll();
         } catch (Exception e) {
             throw new RuntimeException("Error to get coupons");
         }
     }
 
-    public CouponResponse findById(Integer id) {
+    public Coupon findById(Integer id) {
        try {
-            return couponMapper.toResponse(couponRepository.findById(id).get());
+            return couponRepository.findById(id).get();
         } catch (Exception e) {
             throw new RuntimeException("Error to get coupon");
         }
     }
 
 
-    public CouponResponse save(CouponRequest couponRequest) {
+    public Coupon save(CouponRequest couponRequest) {
         try {
             Enterprise enterprise = enterpriseRepository.findById(couponRequest.enterpriseId()).get();
             Coupon coupon = Coupon.builder()
@@ -50,13 +48,13 @@ public class CouponService {
                     .enterprise(enterprise)
                     .couponType(couponTypeRepository.findById(couponRequest.couponTypeId()).get())
                     .build();
-            return couponMapper.toResponse(couponRepository.save(coupon));
+            return couponRepository.save(coupon);
         } catch (Exception e) {
             throw new RuntimeException("Error to save coupon");
         }
     }
 
-    public CouponResponse update(Integer id, CouponRequest couponRequest) {
+    public Coupon update(Integer id, CouponRequest couponRequest) {
         try {
             Enterprise enterprise = enterpriseRepository.findById(couponRequest.enterpriseId()).get();
             Coupon coupon = couponRepository.findById(id).get();
@@ -66,7 +64,7 @@ public class CouponService {
             coupon.setActive(couponRequest.active()    != null ? couponRequest.active() : coupon.getActive());
             coupon.setEnterprise(enterprise != null ? enterprise : coupon.getEnterprise());
             coupon.setCouponType(couponTypeRepository.findById(couponRequest.couponTypeId()).get() != null ? couponTypeRepository.findById(couponRequest.couponTypeId()).get() : coupon.getCouponType());
-            return couponMapper.toResponse(couponRepository.save(coupon));
+            return couponRepository.save(coupon);
         } catch (Exception e) {
             throw new RuntimeException("Error to update coupon");
         }

@@ -1,11 +1,9 @@
 package com.example.cleancontrol.api.mapper;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Component;
 
 import com.example.cleancontrol.api.dto.userDto.UserTokenDto;
 import com.example.cleancontrol.domain.model.Users;
-import com.example.cleancontrol.domain.repository.UserRepository;
 
 @Component
 public class UserMapper {
@@ -22,7 +20,7 @@ public class UserMapper {
             // userTokenDto.token(token);
 
 
-            UserTokenDto userTokenDto = new UserTokenDto(user.getId(), user.getName(), user.getEmail(), token);
+            UserTokenDto userTokenDto = new UserTokenDto(user.getId(), user.getEmail(),user.getName(), token);
 
             return userTokenDto;
         }
