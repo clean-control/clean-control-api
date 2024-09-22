@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.cleancontrol.api.dto.transactionTypeDto.TransactionTypeRequest;
 import com.example.cleancontrol.api.dto.transactionTypeDto.TransactionTypeResponse;
-
+import com.example.cleancontrol.api.mapper.TransactionTypeMapper;
 import com.example.cleancontrol.api.service.TransactionTypeService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,25 +26,26 @@ import java.util.List;
 public class TransactionTypeController {
 
     private final TransactionTypeService transactionTypeService ;
+    private final TransactionTypeMapper transactionTypeMapper;
 
     @PostMapping
     public ResponseEntity<TransactionTypeResponse> save(@RequestBody TransactionTypeRequest transactionTypeRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(transactionTypeService.save(transactionTypeRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(transactionTypeMapper.toResponse(transactionTypeService.save(transactionTypeRequest)));
     }
 
     @GetMapping
     public ResponseEntity<List<TransactionTypeResponse>> findAll() {
-        return ResponseEntity.ok(transactionTypeService.findAll());
+        return ResponseEntity.ok(transactionTypeService.findAll().stream().map(transactionTypeMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TransactionTypeResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(transactionTypeService.findById(id));
+        return ResponseEntity.ok(transactionTypeMapper.toResponse(transactionTypeService.findById(id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<TransactionTypeResponse> update(@PathVariable Integer id, @RequestBody TransactionTypeRequest transactionTypeRequest) {
-        return ResponseEntity.ok(transactionTypeService.update(id, transactionTypeRequest));
+        return ResponseEntity.ok(transactionTypeMapper.toResponse(transactionTypeService.update(id, transactionTypeRequest)));
     }
 
     @DeleteMapping("/{id}")

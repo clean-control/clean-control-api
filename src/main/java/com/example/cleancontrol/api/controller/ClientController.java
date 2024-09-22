@@ -1,4 +1,5 @@
 package com.example.cleancontrol.api.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.cleancontrol.api.dto.clientDto.ClientRequest;
+import com.example.cleancontrol.api.dto.clientDto.ClientResponse;
+import com.example.cleancontrol.api.mapper.ClientMapper;
 import com.example.cleancontrol.api.service.ClientService;
-import com.example.cleancontrol.api.dto.clientDto.*;
+import com.example.cleancontrol.domain.model.Client;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,13 +26,23 @@ import lombok.RequiredArgsConstructor;
 public class ClientController {
 
     private final ClientService clientService;
+        private final ClientMapper clientMapper;
+
 
     @GetMapping
     public ResponseEntity<List<ClientResponse>> getAllClient(){
+        List<ClientResponse> clientRes =  new ArrayList();
 
           try {
-            List<ClientResponse> client = clientService.findAll();
-            return ResponseEntity.ok(client);
+            // pegue os users dentro de client
+            List<Client> clients = clientService.findAll();
+            for (Client client : clients) {
+                System.out.println(client.getUser());
+
+                ClientResponse clientResponse = clientMapper.toResponse(client.getUser());
+                clientRes.add(clientResponse);
+            }
+            return ResponseEntity.ok(clientRes);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -38,7 +52,7 @@ public class ClientController {
     @GetMapping("/{id}")
     public ResponseEntity<ClientResponse> getClient(@PathVariable Integer id){
         try {
-            ClientResponse client = clientService.findById(id);
+            ClientResponse client = clientMapper.toResponse(clientService.findById(id).getUser());
             return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -49,7 +63,7 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<ClientResponse> saveClient(@RequestBody ClientRequest data){
         try {
-            ClientResponse client = clientService.save(data);
+            ClientResponse client = clientMapper.toResponse(clientService.save(data).getUser());
             return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -60,7 +74,7 @@ public class ClientController {
     @PutMapping("/{id}")
     public ResponseEntity<ClientResponse> updateClient(@PathVariable Integer id, @RequestBody ClientRequest data){
         try {
-            ClientResponse client = clientService.update(id, data);
+            ClientResponse client = clientMapper.toResponse(clientService.update(id, data).getUser());
             return ResponseEntity.ok(client);
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.cleancontrol.api.dto.clientDto.ClientResponse;
 import com.example.cleancontrol.api.dto.userDto.UserTokenDto;
-import com.example.cleancontrol.domain.model.Client;
 import com.example.cleancontrol.domain.model.Users;
 
 @Component

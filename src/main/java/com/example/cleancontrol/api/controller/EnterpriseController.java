@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cleancontrol.api.dto.enterpriseDto.EnterpriseRequest;
 import com.example.cleancontrol.api.dto.enterpriseDto.EnterpriseResponse;
+import com.example.cleancontrol.api.mapper.EnterpriseMapper;
 import com.example.cleancontrol.api.service.EnterpriseService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,25 +25,26 @@ import lombok.RequiredArgsConstructor;
 public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
+    private final EnterpriseMapper enterpriseMapper;
 
     @GetMapping
     public ResponseEntity<List<EnterpriseResponse>> findAll() {
-        return ResponseEntity.ok(enterpriseService.findAll());
+        return ResponseEntity.ok(enterpriseService.findAll().stream().map(enterpriseMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EnterpriseResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(enterpriseService.findById(id));
+        return ResponseEntity.ok(enterpriseMapper.toResponse(enterpriseService.findById(id)));
     }
 
     @PostMapping
     public ResponseEntity<EnterpriseResponse> save(@RequestBody EnterpriseRequest enterpriseRequest) {
-        return ResponseEntity.ok(enterpriseService.save(enterpriseRequest));
+        return ResponseEntity.ok(enterpriseMapper.toResponse(enterpriseService.save(enterpriseRequest)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EnterpriseResponse> update(@PathVariable Integer id, @RequestBody EnterpriseRequest enterpriseRequest) {
-        return ResponseEntity.ok(enterpriseService.update(id, enterpriseRequest));
+        return ResponseEntity.ok(enterpriseMapper.toResponse(enterpriseService.update(id, enterpriseRequest)));
     }
 
     @DeleteMapping("/{id}")

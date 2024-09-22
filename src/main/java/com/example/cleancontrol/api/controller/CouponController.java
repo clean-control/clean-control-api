@@ -1,5 +1,6 @@
 package com.example.cleancontrol.api.controller;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.cleancontrol.api.service.CouponService;
 
 import com.example.cleancontrol.api.dto.couponDto.*;
+import com.example.cleancontrol.api.mapper.CouponMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,12 +25,14 @@ import lombok.RequiredArgsConstructor;
 public class CouponController {
 
     private final CouponService couponService;
+        private final CouponMapper couponMapper;
+
 
     @GetMapping
     public ResponseEntity<List<CouponResponse>> getAllCoupon(){
 
           try {
-            List<CouponResponse> coupon = couponService.findAll();
+            List<CouponResponse> coupon = couponService.findAll().stream().map(couponMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(coupon);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -39,7 +43,7 @@ public class CouponController {
     @GetMapping("/{id}")
     public ResponseEntity<CouponResponse> getCoupon(@PathVariable Integer id){
         try {
-            CouponResponse coupon = couponService.findById(id);
+            CouponResponse coupon = couponMapper.toResponse(couponService.findById(id));
             return ResponseEntity.ok(coupon);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -50,7 +54,7 @@ public class CouponController {
     @PostMapping
     public ResponseEntity<CouponResponse> saveCoupon(@RequestBody CouponRequest data){
         try {
-            CouponResponse coupon = couponService.save(data);
+            CouponResponse coupon = couponMapper.toResponse(couponService.save(data));
             return ResponseEntity.ok(coupon);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -61,7 +65,7 @@ public class CouponController {
     @PutMapping("/{id}")
     public ResponseEntity<CouponResponse> updateCoupon(@PathVariable Integer id, @RequestBody CouponRequest data){
         try {
-            CouponResponse coupon = couponService.update(id, data);
+            CouponResponse coupon = couponMapper.toResponse(couponService.update(id, data));
             return ResponseEntity.ok(coupon);
         } catch (Exception e) {
             System.out.println(e.getMessage());

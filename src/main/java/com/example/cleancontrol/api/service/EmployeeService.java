@@ -1,13 +1,11 @@
 package com.example.cleancontrol.api.service;
 
-import lombok.RequiredArgsConstructor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.cleancontrol.api.dto.employeeDto.EmployeeRequest;
-import com.example.cleancontrol.api.dto.employeeDto.EmployeeResponse;
-import com.example.cleancontrol.api.mapper.EmployeeMapper;
 import com.example.cleancontrol.domain.model.Employee;
 import com.example.cleancontrol.domain.model.EmployeeType;
 import com.example.cleancontrol.domain.model.Enterprise;
@@ -18,13 +16,14 @@ import com.example.cleancontrol.domain.repository.EnterpriseRepository;
 import com.example.cleancontrol.domain.repository.UserRepository;
 import com.example.cleancontrol.domain.repository.UserTypeRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    private final EmployeeMapper employeeMapper;
 
     private final EmployeeTypeRepository employeeTypeRepository;
 
@@ -33,15 +32,14 @@ public class EmployeeService {
     private final UserRepository userRepository;
     private final UserTypeRepository userTypeRepository;
 
-    public List<EmployeeResponse> findAll() {
+    public List<Employee> findAll() {
         try {
 
-            List<EmployeeResponse> employees = new ArrayList<EmployeeResponse>();
+            List<Employee> employees = new ArrayList<Employee>();
 
             for (Employee employee : employeeRepository.findAll()) {
 
-                employees.add(employeeMapper.toResponse(employee.getUser(), employee.getEmployeeType(),
-                        employee.getEnterprise()));
+                employees.add(employee);
 
             }
 
@@ -51,16 +49,16 @@ public class EmployeeService {
         }
     }
 
-    public EmployeeResponse findById(Integer id) {
+    public Employee findById(Integer id) {
         try {
             Employee employee = employeeRepository.findById(id).get();
-            return employeeMapper.toResponse(employee.getUser(), employee.getEmployeeType(), employee.getEnterprise());
+            return employee;
         } catch (Exception e) {
             throw new RuntimeException("Error to get employee");
         }
     }
 
-    public EmployeeResponse save(EmployeeRequest employeeRequest) {
+    public Employee save(EmployeeRequest employeeRequest) {
         try {
 
             EmployeeType employeeType = employeeTypeRepository.findById(employeeRequest.employeeTypeId()).get();
@@ -79,9 +77,6 @@ public class EmployeeService {
                     .userType(userTypeRepository.findByName("Employee"))
                     .build();
 
-
-
-
             userRepository.save(user);
 
             Employee employee = Employee.builder()
@@ -92,13 +87,13 @@ public class EmployeeService {
 
             employeeRepository.save(employee);
 
-            return employeeMapper.toResponse(employee.getUser(), employee.getEmployeeType(), employee.getEnterprise());
+            return employee;
         } catch (Exception e) {
             throw new RuntimeException("Error to save employee");
         }
     }
 
-    public EmployeeResponse update(Integer id, EmployeeRequest employeeRequest) {
+    public Employee update(Integer id, EmployeeRequest employeeRequest) {
         try {
 
             EmployeeType employeeType = employeeTypeRepository.findById(employeeRequest.employeeTypeId()).get();
@@ -131,7 +126,7 @@ public class EmployeeService {
 
             employeeRepository.save(employee);
 
-            return employeeMapper.toResponse(employee.getUser(), employee.getEmployeeType(), employee.getEnterprise());
+            return employee;
         } catch (Exception e) {
             throw new RuntimeException("Error to update employee");
         }

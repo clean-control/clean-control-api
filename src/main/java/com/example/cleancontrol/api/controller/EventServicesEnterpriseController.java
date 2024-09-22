@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.cleancontrol.api.dto.eventServicesEnterpriseDto.EventServicesEnterpriseRequest;
 import com.example.cleancontrol.api.dto.eventServicesEnterpriseDto.EventServicesEnterpriseResponse;
-
+import com.example.cleancontrol.api.mapper.EventServicesEnterpriseMapper;
 import com.example.cleancontrol.api.service.EventServicesEnterpriseService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,25 +26,26 @@ import java.util.List;
 public class EventServicesEnterpriseController {
 
     private final EventServicesEnterpriseService eventServicesEnterpriseService ;
+    private final EventServicesEnterpriseMapper eventServicesEnterpriseMapper;
 
     @PostMapping
     public ResponseEntity<EventServicesEnterpriseResponse> save(@RequestBody EventServicesEnterpriseRequest eventServicesEnterpriseRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventServicesEnterpriseService.save(eventServicesEnterpriseRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventServicesEnterpriseMapper.toResponse(eventServicesEnterpriseService.save(eventServicesEnterpriseRequest)));
     }
 
     @GetMapping
     public ResponseEntity<List<EventServicesEnterpriseResponse>> findAll() {
-        return ResponseEntity.ok(eventServicesEnterpriseService.findAll());
+        return ResponseEntity.ok(eventServicesEnterpriseService.findAll().stream().map(eventServicesEnterpriseMapper::toResponse).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EventServicesEnterpriseResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(eventServicesEnterpriseService.findById(id));
+        return ResponseEntity.ok(eventServicesEnterpriseMapper.toResponse(eventServicesEnterpriseService.findById(id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EventServicesEnterpriseResponse> update(@PathVariable Integer id, @RequestBody EventServicesEnterpriseRequest eventServicesEnterpriseRequest) {
-        return ResponseEntity.ok(eventServicesEnterpriseService.update(id, eventServicesEnterpriseRequest));
+        return ResponseEntity.ok(eventServicesEnterpriseMapper.toResponse(eventServicesEnterpriseService.update(id, eventServicesEnterpriseRequest)));
     }
 
     @DeleteMapping("/{id}")
