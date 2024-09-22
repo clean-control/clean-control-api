@@ -2,6 +2,7 @@ package com.example.cleancontrol.api.service;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,12 +15,17 @@ import com.example.cleancontrol.config.FileStorageApiProperties;
 public class FileService {
     private final  Cloudinary cloudinary;
 
-    public FileService(FileStorageApiProperties fileStorageApiProperties) {
+    public FileService(
+        @Value("${cloudinary.cloud_name}") String cloudName,
+        @Value("${cloudinary.api_key}") String apiKey,
+        @Value("${cloudinary.api_secret}") String apiSecret
+    ) {
         this.cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "dzutcf8qe",
-                "api_key", "167129722689288",
-                "api_secret", "OeT7FMp5afVS4DY5VGvr_Z9zBAk",
-                "secure", true));
+                "cloud_name", cloudName,
+                "api_key", apiKey,
+                "api_secret", apiSecret,
+                "secure", true
+        ));
     }
 
     public  String upload(MultipartFile file) {
