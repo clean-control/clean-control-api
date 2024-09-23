@@ -15,9 +15,9 @@ public class CleancontrolApplication {
 		SpringApplication.run(CleancontrolApplication.class, args);
 	}
 
-		@Bean
-	ApplicationRunner runner(PasswordEncoder passwordEncoder) {
-		return args -> System.out.println(passwordEncoder.encode("password"));
-	}
+	// 	@Bean
+	// ApplicationRunner runner(PasswordEncoder passwordEncoder) {
+	// 	return args -> System.out.println(passwordEncoder.encode("password"));
+	// }
 
 }
