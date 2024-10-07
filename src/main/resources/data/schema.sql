@@ -13,8 +13,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.address (
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.user_type (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -24,8 +22,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.user_type (
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.users (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -46,8 +42,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.users (
     FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE,
     FOREIGN KEY (user_type_id) REFERENCES user_type(id) ON DELETE CASCADE
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.client (
     id INT NOT NULL AUTO_INCREMENT,
     users_id INT NOT NULL,
@@ -56,7 +50,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.client (
     PRIMARY KEY (id),
     FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
 CREATE TABLE IF NOT EXISTS cleanControl.enterprise (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -190,7 +183,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.transaction_type (
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
-
 CREATE TABLE IF NOT EXISTS cleanControl.transaction(
     id INT NOT NULL AUTO_INCREMENT,
     total DECIMAL(10, 2) NOT NULL,
@@ -206,8 +198,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.transaction(
     FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE,
     FOREIGN KEY (transaction_type_id) REFERENCES transaction_type(id) ON DELETE CASCADE
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.event_type (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -217,8 +207,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.event_type (
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.event_enterprise (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -233,8 +221,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.event_enterprise (
     FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE,
     FOREIGN KEY (event_type_id) REFERENCES event_type(id) ON DELETE CASCADE
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.event_services_enterprise (
     id INT NOT NULL AUTO_INCREMENT,
     event_id INT NOT NULL,
@@ -245,8 +231,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.event_services_enterprise (
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.scheduler_type (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -255,7 +239,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.scheduler_type (
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
-
 CREATE TABLE IF NOT EXISTS cleanControl.scheduler (
     id INT NOT NULL AUTO_INCREMENT,
     date TIMESTAMP NOT NULL,
@@ -266,8 +249,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.scheduler (
     PRIMARY KEY (id),
     FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE
 );
-
-
 CREATE TABLE IF NOT EXISTS cleanControl.file (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -277,10 +258,10 @@ CREATE TABLE IF NOT EXISTS cleanControl.file (
     path VARCHAR(255) NOT NULL,
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
-    client_id INT ,
-    employee_id INT ,
+    client_id INT,
+    employee_id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE,
     FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE
-    );
--- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga 
+);
+-- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga
