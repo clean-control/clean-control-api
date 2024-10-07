@@ -258,10 +258,23 @@ CREATE TABLE IF NOT EXISTS cleanControl.file (
     path VARCHAR(255) NOT NULL,
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
-    client_id INT,
-    employee_id INT,
+    client_id INT ,
+    employee_id INT ,
+    enterprise_id INT ,
+    category_id INT ,
+    product_id INT ,
+    service_id INT ,
+    product_type_id INT ,
+    service_type_id INT ,
+
     PRIMARY KEY (id),
     FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE,
-    FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE
-);
--- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga
+    FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE,
+    FOREIGN KEY (enterprise_id) REFERENCES enterprise(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+    FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_type_id) REFERENCES product_type(id) ON DELETE CASCADE,
+    FOREIGN KEY (service_type_id) REFERENCES service_type(id) ON DELETE CASCADE
+    );
+-- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga 

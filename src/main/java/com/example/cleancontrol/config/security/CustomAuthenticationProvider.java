@@ -25,28 +25,19 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password =  authentication.getCredentials().toString();
 
-        System.out.println(username);
-        System.out.println(password);
 
-        System.out.println("comecou aqui");
         UserDetails userDetails = authenticationService.loadUserByUsername(username);
-        System.out.println("acabou aqui");
 
         if (userDetails == null) {
-            System.out.println("entrou no if");
             throw new BadCredentialsException("Usuário ou senha inválidos");
         }
 
         if (passwordEncoder.matches(password, userDetails.getPassword())) {
-            System.out.println("entrou no if 2");
             return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         } else {
-            System.out.println("entrou no else");
             throw new BadCredentialsException("Usuário ou senha inválidos");
         }
 
-        // System.out.println("entrou no if 2");
-        // return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
     @Override

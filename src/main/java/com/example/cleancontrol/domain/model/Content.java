@@ -46,6 +46,30 @@ public class Content {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id")
+    private Enterprise enterprise;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private Services service;
+
+    @ManyToOne
+    @JoinColumn(name = "product_type_id")
+    private ProductType productType;
+
+    @ManyToOne
+    @JoinColumn(name = "service_type_id")
+    private ServiceType serviceType;
+
     @CreationTimestamp
     private LocalDateTime createDate;
 

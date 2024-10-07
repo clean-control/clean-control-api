@@ -1,5 +1,6 @@
 package com.example.cleancontrol.api.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import com.example.cleancontrol.config.FileStorageApiProperties;
 @Service
 public class FileService {
     private final  Cloudinary cloudinary;
+    private final List<String> allowedExtensions = List.of("jpg", "jpeg", "png", "gif", "webp");
 
     public FileService(
         @Value("${cloudinary.cloud_name}") String cloudName,
@@ -29,7 +31,14 @@ public class FileService {
     }
 
     public  String upload(MultipartFile file) {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+
+        if (!allowedExtensions.contains(fileExtension)) {
+            throw new RuntimeException("Extensão de arquivo não permitida");
+        }
+
+
+        String fileName = file.getOriginalFilename().replace("." + fileExtension, "") ;
         try {
             @SuppressWarnings("rawtypes")
             Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("public_id", fileName));

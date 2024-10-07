@@ -43,7 +43,6 @@ public class SecurityConfig {
         new AntPathRequestMatcher("/webjars/**"),
         new AntPathRequestMatcher("/v3/api-docs/**"),
         new AntPathRequestMatcher("/actuator/*"),
-        new AntPathRequestMatcher("/h2-console/**"),
         new AntPathRequestMatcher("/error/**"),
         new AntPathRequestMatcher("/authentication"),
       
