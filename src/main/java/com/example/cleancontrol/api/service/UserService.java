@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.cleancontrol.api.dto.userDto.UserLoginDto;
 import com.example.cleancontrol.api.dto.userDto.UserTokenDto;
 import com.example.cleancontrol.api.mapper.ClientMapper;
-import com.example.cleancontrol.api.security.GerenciadorTokenJwt;
+import com.example.cleancontrol.config.security.GerenciadorTokenJwt;
 import com.example.cleancontrol.domain.model.Users;
 import com.example.cleancontrol.domain.repository.UserRepository;
 

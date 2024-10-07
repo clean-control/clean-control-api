@@ -1,4 +1,4 @@
-package com.example.cleancontrol.api.security;
+package com.example.cleancontrol.config.security;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

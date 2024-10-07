@@ -1,4 +1,4 @@
-package com.example.cleancontrol.api.security;
+package com.example.cleancontrol.config.security;
 
 
 import java.nio.charset.StandardCharsets;
