@@ -2,6 +2,8 @@ package com.example.cleancontrol.api.service;
 
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -67,6 +69,7 @@ public class ContentService {
                     .build();
 
             Content content = contentRepository.save(fileResponse);
+            
 
             return new FileResponse(
                     content.getId(),
@@ -115,5 +118,10 @@ public class ContentService {
             default:
                 return null;
         }
+    }
+
+
+    public List<Content> findAll( ) {
+        return contentRepository.findAll();
     }
 }

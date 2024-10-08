@@ -24,7 +24,6 @@ public class GerenciadorTokenJwt {
     private long jwtTokenValidity;
 
     public String getUsernameFromToken(String token) {
-        System.out.println("getusernamefromtoken "+getClaimForToken(token, Claims::getSubject));
         return getClaimForToken(token, Claims::getSubject);
     }
 
@@ -38,9 +37,6 @@ public class GerenciadorTokenJwt {
         final String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-                System.out.println("generatetolken "+authentication);
-                System.out.println("tummm "+authentication.getName());
-
         return Jwts.builder().setSubject(authentication.getName())
                 .signWith(parseSecret()).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtTokenValidity * 1_000)).compact();
@@ -48,7 +44,6 @@ public class GerenciadorTokenJwt {
 
     public <T> T getClaimForToken(String token, Function<Claims, T> claimsResolver) {
     Claims claims = getAllClaimsFromToken(token);
-    System.out.println("clains do getClaimForToken "+claims);
     return claimsResolver.apply(claims);
 
 }
@@ -63,11 +58,6 @@ private boolean isTokenExpired(String token) {
 }
 
 private Claims getAllClaimsFromToken(String token) {
-    System.out.println("Clains ++"+Jwts.parserBuilder()
-    .setSigningKey(parseSecret())
-    .build()
-    .parseClaimsJws(token).getBody());
-
     return Jwts.parserBuilder()
             .setSigningKey(parseSecret())
             .build()
