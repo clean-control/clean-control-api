@@ -49,7 +49,7 @@ public class ContentService {
             Object obj  = buscarReferenciaPorId(id, type);
 
             if (obj == null) {
-                throw new Exception("Usuário não encontrado");
+                throw new Exception("Referencia não encontradas››");
             }
             String fileDownloadUri = fileService.upload(file);
 

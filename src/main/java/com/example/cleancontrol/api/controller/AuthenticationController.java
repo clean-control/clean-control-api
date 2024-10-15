@@ -14,8 +14,6 @@ import com.example.cleancontrol.api.service.UserService;
 
 @RestController
 public class AuthenticationController {
-  // @Autowired
-  // private AuthenticationService authenticationService;
 
   @Autowired
   private UserService clientService;

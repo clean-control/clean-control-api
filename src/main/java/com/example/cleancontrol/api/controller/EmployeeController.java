@@ -34,7 +34,7 @@ public class EmployeeController {
             List<EmployeeResponse> employee = employeeService.findAll().stream().map(employeeMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -45,7 +45,7 @@ public class EmployeeController {
             EmployeeResponse employee = employeeMapper.toResponse(employeeService.findById(id));
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -56,7 +56,7 @@ public class EmployeeController {
             EmployeeResponse employee = employeeMapper.toResponse(employeeService.save(data));
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -67,7 +67,7 @@ public class EmployeeController {
             EmployeeResponse employee = employeeMapper.toResponse(employeeService.update(id, data));
             return ResponseEntity.ok(employee);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -78,7 +78,7 @@ public class EmployeeController {
             employeeService.active(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
       
@@ -90,7 +90,7 @@ public class EmployeeController {
             employeeService.delete(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }

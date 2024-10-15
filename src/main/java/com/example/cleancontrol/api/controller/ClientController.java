@@ -34,7 +34,6 @@ public class ClientController {
         List<ClientResponse> clientRes =  new ArrayList();
 
           try {
-            // pegue os users dentro de client
             List<Client> clients = clientService.findAll();
             for (Client client : clients) {
                 System.out.println(client.getUser());
@@ -44,7 +43,7 @@ public class ClientController {
             }
             return ResponseEntity.ok(clientRes);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -55,7 +54,7 @@ public class ClientController {
             ClientResponse client = clientMapper.toResponse(clientService.findById(id).getUser());
             return ResponseEntity.ok(client);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -66,7 +65,7 @@ public class ClientController {
             ClientResponse client = clientMapper.toResponse(clientService.save(data).getUser());
             return ResponseEntity.ok(client);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -77,7 +76,7 @@ public class ClientController {
             ClientResponse client = clientMapper.toResponse(clientService.update(id, data).getUser());
             return ResponseEntity.ok(client);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -88,7 +87,7 @@ public class ClientController {
             clientService.delete(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -99,7 +98,7 @@ public class ClientController {
             clientService.activeClient(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }

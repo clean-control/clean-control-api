@@ -33,7 +33,7 @@ public class CategoryController {
             List<CategoryResponse> category = categoryService.findAll().stream().map(categoryMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(category);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -44,7 +44,7 @@ public class CategoryController {
             CategoryResponse category = categoryMapper.toResponse(categoryService.findById(id));
             return ResponseEntity.ok(category);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -57,7 +57,7 @@ public class CategoryController {
              return ResponseEntity.noContent().build();
             
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -68,7 +68,7 @@ public class CategoryController {
             CategoryResponse category = categoryMapper.toResponse(categoryService.save(data));
             return ResponseEntity.status(201).body(category);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
 
@@ -81,7 +81,7 @@ public class CategoryController {
 
             return ResponseEntity.ok(category);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -93,7 +93,7 @@ public class CategoryController {
              categoryService.delete(id);
              return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }

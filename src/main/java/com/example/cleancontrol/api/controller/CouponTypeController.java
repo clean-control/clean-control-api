@@ -34,7 +34,7 @@ public class CouponTypeController {
             List<CouponTypeResponse> couponType = couponTypeService.findAll().stream().map(couponTypeMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -45,7 +45,7 @@ public class CouponTypeController {
             CouponTypeResponse couponType = couponTypeMapper.toResponse(couponTypeService.findById(id));
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -56,7 +56,7 @@ public class CouponTypeController {
             CouponTypeResponse couponType = couponTypeMapper.toResponse(couponTypeService.save(data));
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -67,7 +67,7 @@ public class CouponTypeController {
             CouponTypeResponse couponType =couponTypeMapper.toResponse( couponTypeService.update(id, data));
             return ResponseEntity.ok(couponType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -78,7 +78,7 @@ public class CouponTypeController {
             couponTypeService.delete(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }

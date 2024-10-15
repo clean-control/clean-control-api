@@ -155,7 +155,7 @@ public class ClientService {
             }
 
             Client client = clientRepository.findById(id).orElseThrow();
-Address address = addressRepository.findById(id).orElseThrow();
+            Address address = addressRepository.findById(id).orElseThrow();
             client.getUser().setName(data.name() != null ? data.name() : client.getUser().getName());
             client.getUser().setLastname(data.lastname() != null ? data.lastname() : client.getUser().getLastname());
             client.getUser().setNickname(data.nickname() != null ? data.nickname() : client.getUser().getNickname());

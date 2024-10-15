@@ -35,7 +35,7 @@ public class AddressController {
             List<AddressResponse> address =  addressService.getAllAddress().stream().map(addressMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(address);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
 
@@ -48,7 +48,7 @@ public class AddressController {
             AddressResponse address =addressMapper.toResponse( addressService.getAddressById(id));
             return ResponseEntity.ok(address);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -60,7 +60,7 @@ public class AddressController {
             AddressResponse address = addressMapper.toResponse( addressService.saveAddress(data));
             return ResponseEntity.ok(address);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -72,7 +72,7 @@ public class AddressController {
             AddressResponse address =addressMapper.toResponse( addressService.updateAddress(id, data));
             return ResponseEntity.ok(address);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -84,7 +84,7 @@ public class AddressController {
             addressService.deleteAddress(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }

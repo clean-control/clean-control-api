@@ -1,4 +1,5 @@
-
+USE cleanControl;
+-- Inserts para a tabela `address`
 INSERT INTO cleanControl.address (
         street,
         number,
@@ -11,29 +12,50 @@ INSERT INTO cleanControl.address (
         update_date
     )
 VALUES (
-        'Rua das Flores',
+        'Rua A',
         123,
-        'Apt 101',
+        'Apto 1',
         'Centro',
         'São Paulo',
         'SP',
         '01000-000',
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Avenida Brasil',
+        'Rua B',
         456,
-        'Bloco B',
-        'Zona Norte',
+        NULL,
+        'Jardim',
         'Rio de Janeiro',
         'RJ',
-        '02000-000',
-        NOW(),
-        NOW()
+        '20000-000',
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Avenida C',
+        789,
+        'Bloco 3',
+        'Zona Norte',
+        'Belo Horizonte',
+        'MG',
+        '30000-000',
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Praça D',
+        101,
+        NULL,
+        'Centro',
+        'Curitiba',
+        'PR',
+        '40000-000',
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
-
-
+-- Inserts para a tabela `user_type`
 INSERT INTO cleanControl.user_type (
         name,
         description,
@@ -41,22 +63,35 @@ INSERT INTO cleanControl.user_type (
         create_date,
         update_date
     )
-
 VALUES (
         'Cliente',
-        'Usuário cliente',
+        'Usuário que compra produtos e serviços',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Empresa',
-        'Usuário empresa',
+        'Funcionário',
+        'Usuário que trabalha na empresa',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Administrador',
+        'Usuário com acesso total ao sistema',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Fornecedor',
+        'Usuário que fornece produtos e serviços',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
-
+-- Inserts para a tabela `users`
 INSERT INTO cleanControl.users (
         name,
         lastname,
@@ -76,48 +111,74 @@ INSERT INTO cleanControl.users (
 VALUES (
         'João',
         'Silva',
-        'joaos',
-        'gmail@gmail.com',
+        'joao.s',
+        'joao@example.com',
         'senha123',
-        '12345678901',
+        '12345678900',
         '11999999999',
         '1990-01-01',
-        'http://example.com/joao.jpg',
+        'http://example.com/images/joao.jpg',
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1,
         1
     ),
     (
         'Maria',
-        'Santos',
-        'marias',
-        'sss@gmail.com',
+        'Souza',
+        'maria.s',
+        'maria@example.com',
         'senha123',
-        '98765432100',
+        '23456789012',
         '21999999999',
-        '1995-05-05',
-        'http://example.com/maria.jpg',
+        '1985-05-15',
+        'http://example.com/images/maria.jpg',
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         2,
         2
+    ),
+    (
+        'Pedro',
+        'Lima',
+        'pedro.l',
+        'pedro@example.com',
+        'senha123',
+        '34567890123',
+        '31999999999',
+        '1992-09-30',
+        'http://example.com/images/pedro.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        3,
+        3
+    ),
+    (
+        'Ana',
+        'Pereira',
+        'ana.p',
+        'ana@example.com',
+        'senha123',
+        '45678901234',
+        '41999999999',
+        '1988-12-12',
+        'http://example.com/images/ana.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        4,
+        4
     );
-
-INSERT INTO cleanControl.client (
-        users_id,
-        create_date,
-        update_date
-    )
-VALUES (
-        1,
-        NOW(),
-        NOW()
-    );
-
-
+-- Inserts para a tabela `client`
+INSERT INTO cleanControl.client (users_id, create_date, update_date)
+VALUES (1, '2023-01-01 10:00:00', '2023-01-01 10:00:00'),
+    (2, '2023-01-01 10:00:00', '2023-01-01 10:00:00'),
+    (3, '2023-01-01 10:00:00', '2023-01-01 10:00:00'),
+    (4, '2023-01-01 10:00:00', '2023-01-01 10:00:00');
+-- Inserts para a tabela `enterprise`
 INSERT INTO cleanControl.enterprise (
         name,
         cnpj,
@@ -131,29 +192,54 @@ INSERT INTO cleanControl.enterprise (
         address_id
     )
 VALUES (
-        'Empresa X',
-        '12345678000100',
-        '1133334444',
-        'contato@empresax.com',
-        '$2a$10$7.joW9D4QKXvT7EjvDzWqerOlxBGpF7i4BGRVjHkSHT9Zz8mZ1/ni',
-        'http://example.com/empresax.jpg',
+        'Empresa A',
+        '12345678000195',
+        '11988888888',
+        'contato@empresaA.com',
+        'senha123',
+        'http://example.com/images/empresaA.jpg',
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1
     ),
     (
-        'Empresa Y',
-        '98765432000100',
-        '2133334444',
-        'contato@empresay.com',
+        'Empresa B',
+        '98765432000196',
+        '21988888888',
+        'contato@empresaB.com',
         'senha123',
-        'http://example.com/empresay.jpg',
+        'http://example.com/images/empresaB.jpg',
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         2
+    ),
+    (
+        'Empresa C',
+        '12345678000197',
+        '31988888888',
+        'contato@empresaC.com',
+        'senha123',
+        'http://example.com/images/empresaC.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        3
+    ),
+    (
+        'Empresa D',
+        '98765432000198',
+        '41988888888',
+        'contato@empresaD.com',
+        'senha123',
+        'http://example.com/images/empresaD.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        4
     );
+-- Inserts para a tabela `employee_type`
 INSERT INTO cleanControl.employee_type (
         name,
         description,
@@ -162,19 +248,34 @@ INSERT INTO cleanControl.employee_type (
         update_date
     )
 VALUES (
-        'Admin',
-        'Administrador do sistema',
+        'Gerente',
+        'Responsável pela equipe',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Operacional',
-        'Funcionário operacional',
+        'Atendente',
+        'Atendimento ao cliente',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Estilista',
+        'Corte e estilo de cabelo',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Vendedor',
+        'Venda de produtos e serviços',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
+-- Inserts para a tabela `employee`
 INSERT INTO cleanControl.employee (
         users_id,
         employee_type_id,
@@ -183,14 +284,34 @@ INSERT INTO cleanControl.employee (
         enterprise_id
     )
 VALUES (
-        2,
         1,
-        NOW(),
-        NOW(),
+        1,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1
+    ),
+    (
+        2,
+        2,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        1
+    ),
+    (
+        3,
+        3,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        2
+    ),
+    (
+        4,
+        4,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        3
     );
-
-
+-- Inserts para a tabela `category`
 INSERT INTO cleanControl.category (
         name,
         description,
@@ -200,21 +321,38 @@ INSERT INTO cleanControl.category (
         update_date
     )
 VALUES (
-        'Limpeza',
-        'Produtos de limpeza',
-        'http://example.com/limpeza.jpg',
+        'Cabelo',
+        'Produtos e serviços para cabelo',
+        'http://example.com/images/cabelo.jpg',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Higiene',
-        'Produtos de higiene pessoal',
-        'http://example.com/higiene.jpg',
+        'Beleza',
+        'Produtos e serviços de beleza',
+        'http://example.com/images/beleza.jpg',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Saúde',
+        'Produtos para saúde e bem-estar',
+        'http://example.com/images/saude.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Fitness',
+        'Produtos e serviços de fitness',
+        'http://example.com/images/fitness.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
+-- Inserts para a tabela `product_type`
 INSERT INTO cleanControl.product_type (
         name,
         description,
@@ -225,23 +363,42 @@ INSERT INTO cleanControl.product_type (
         update_date
     )
 VALUES (
-        'Detergente',
-        'Detergente líquido',
+        'Shampoo',
+        'Produto para lavar o cabelo',
         1,
-        'http://example.com/detergente.jpg',
+        'http://example.com/images/shampoo.jpg',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Sabonete',
-        'Sabonete em barra',
-        2,
-        'http://example.com/sabonete.jpg',
+        'Condicionador',
+        'Produto para condicionar o cabelo',
+        1,
+        'http://example.com/images/condicionador.jpg',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Maquiagem',
+        'Produtos de maquiagem',
+        2,
+        'http://example.com/images/maquiagem.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Suplementos',
+        'Suplementos alimentares',
+        3,
+        'http://example.com/images/suplementos.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
+-- Inserts para a tabela `product`
 INSERT INTO cleanControl.product (
         name,
         description,
@@ -255,29 +412,54 @@ INSERT INTO cleanControl.product (
         product_type_id
     )
 VALUES (
-        'Detergente Azul',
-        'Detergente para louças',
-        5.50,
-        'http://example.com/detergente_azul.jpg',
+        'Shampoo Anti-resíduos',
+        'Remove impurezas do cabelo',
+        50.00,
+        'http://example.com/images/shampoo.jpg',
         100,
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1,
         1
     ),
     (
-        'Sabonete Floral',
-        'Sabonete com fragrância floral',
-        2.75,
-        'http://example.com/sabonete_floral.jpg',
-        200,
+        'Condicionador Hidratante',
+        'Hidrata e suaviza os fios',
+        45.00,
+        'http://example.com/images/condicionador.jpg',
+        100,
         TRUE,
-        NOW(),
-        NOW(),
-        2,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        1,
         2
+    ),
+    (
+        'Base Líquida',
+        'Base para maquiagem',
+        80.00,
+        'http://example.com/images/base.jpg',
+        50,
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        2,
+        3
+    ),
+    (
+        'Whey Protein',
+        'Suplemento proteico',
+        150.00,
+        'http://example.com/images/whey.jpg',
+        30,
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        3,
+        4
     );
+-- Inserts para a tabela `service_type`
 INSERT INTO cleanControl.service_type (
         name,
         description,
@@ -288,23 +470,42 @@ INSERT INTO cleanControl.service_type (
         update_date
     )
 VALUES (
-        'Limpeza Residencial',
-        'Serviço de limpeza para residências',
+        'Corte de Cabelo',
+        'Corte e estilo de cabelo',
         1,
-        'http://example.com/limpeza_residencial.jpg',
+        'http://example.com/images/corte.jpg',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Limpeza Comercial',
-        'Serviço de limpeza para empresas',
-        1,
-        'http://example.com/limpeza_comercial.jpg',
+        'Maquiagem',
+        'Serviço de maquiagem',
+        2,
+        'http://example.com/images/maquiagem.jpg',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Consulta de Saúde',
+        'Consulta com especialista',
+        3,
+        'http://example.com/images/consulta.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Treinamento Funcional',
+        'Treino personalizado',
+        4,
+        'http://example.com/images/treinamento.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
+-- Inserts para a tabela `services`
 INSERT INTO cleanControl.services (
         name,
         description,
@@ -317,27 +518,50 @@ INSERT INTO cleanControl.services (
         service_type_id
     )
 VALUES (
-        'Limpeza Completa',
-        'Limpeza geral da residência',
-        150.00,
-        'http://example.com/limpeza_completa.jpg',
+        'Corte Simples',
+        'Corte de cabelo simples',
+        30.00,
+        'http://example.com/images/corte_simples.jpg',
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1,
         1
     ),
     (
-        'Limpeza Escritório',
-        'Limpeza de escritório',
-        250.00,
-        'http://example.com/limpeza_escritorio.jpg',
+        'Corte e Penteado',
+        'Corte com penteado',
+        70.00,
+        'http://example.com/images/corte_penteado.jpg',
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        1,
+        1
+    ),
+    (
+        'Maquiagem Completa',
+        'Maquiagem para festas',
+        100.00,
+        'http://example.com/images/maquiagem_completa.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         2,
         2
+    ),
+    (
+        'Consulta de Saúde Geral',
+        'Consulta com clínico geral',
+        150.00,
+        'http://example.com/images/consulta_geral.jpg',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        3,
+        3
     );
+-- Inserts para a tabela `coupon_type`
 INSERT INTO cleanControl.coupon_type (
         name,
         description,
@@ -346,19 +570,34 @@ INSERT INTO cleanControl.coupon_type (
         update_date
     )
 VALUES (
-        'Desconto',
-        'Cupom de desconto',
+        'Desconto em Produto',
+        'Desconto em produtos da loja',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Frete Grátis',
-        'Cupom de frete grátis',
+        'Desconto em Serviço',
+        'Desconto em serviços oferecidos',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Promoção de Aniversário',
+        'Desconto especial para aniversariantes',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Desconto em Combo',
+        'Desconto ao comprar produtos e serviços juntos',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
+-- Inserts para a tabela `coupon`
 INSERT INTO cleanControl.coupon (
         name,
         description,
@@ -370,25 +609,46 @@ INSERT INTO cleanControl.coupon (
         coupon_type_id
     )
 VALUES (
-        'CUPOM10',
-        '10% de desconto',
+        '10% OFF Produtos',
+        'Desconto de 10% em produtos',
         10.00,
         TRUE,
-        NOW(),
-        NOW(),
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1,
         1
     ),
     (
-        'FRETEGRATIS',
-        'Frete grátis para compras acima de R$100',
-        0.00,
+        '15% OFF Serviços',
+        'Desconto de 15% em serviços',
+        15.00,
         TRUE,
-        NOW(),
-        NOW(),
-        2,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        1,
         2
+    ),
+    (
+        'Aniversariante do Mês',
+        'Desconto especial para aniversariantes',
+        20.00,
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        2,
+        3
+    ),
+    (
+        'Combo Desconto',
+        'Desconto ao comprar combo de produtos e serviços',
+        25.00,
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        2,
+        4
     );
+-- Inserts para a tabela `transaction_type`
 INSERT INTO cleanControl.transaction_type (
         name,
         description,
@@ -398,124 +658,80 @@ INSERT INTO cleanControl.transaction_type (
     )
 VALUES (
         'Venda',
-        'Transação de venda',
+        'Transação de venda de produto ou serviço',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Compra',
-        'Transação de compra',
+        'Devolução',
+        'Transação de devolução de produto',
         TRUE,
-        NOW(),
-        NOW()
-    );
-
-    INSERT INTO cleanControl.event_type (
-        name,
-        description,
-        active,
-        create_date,
-        update_date
-    )
-    VALUES (
-        'Festa',
-        'Evento de festa',
-        TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     ),
     (
-        'Casamento',
-        'Evento de casamento',
+        'Ajuste',
+        'Ajuste de valor em transação',
         TRUE,
-        NOW(),
-        NOW()
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
+    ),
+    (
+        'Pagamento',
+        'Transação de pagamento de conta',
+        TRUE,
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00'
     );
-
-    INSERT INTO cleanControl.event_enterprise (
-        name,
-        description,
-        active,
+-- Inserts para a tabela `transaction`
+INSERT INTO cleanControl.transaction (
+        total,
+        payment_method,
+        transaction_type_id,
+        status,
         create_date,
         update_date,
         enterprise_id,
-        event_type_id
+        client_id
     )
-    VALUES (
-        'Festa de Aniversário',
-        'Festa de aniversário de 18 anos',
-        TRUE,
-        NOW(),
-        NOW(),
+VALUES (
+        100.00,
+        'Cartão de Crédito',
+        1,
+        'Completo',
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1,
         1
     ),
     (
-        'Casamento de Maria e João',
-        'Casamento de Maria e João',
-        TRUE,
-        NOW(),
-        NOW(),
-        2,
-        2
-    );
-
-    INSERT INTO cleanControl.event_services_enterprise (
-        event_id,
-        service_id,
-        product_id
-    )
-    VALUES (
+        200.00,
+        'Dinheiro',
         1,
+        'Completo',
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
         1,
-        1
-    ),
-    (
-        2,
-        2,
         2
-    );
-
-    INSERT INTO cleanControl.scheduler_type (
-        name,
-        description,
-        create_date,
-        update_date
-    )
-
-    VALUES (
-        'Diário',
-        'Agendamento diário',
-        NOW(),
-        NOW()
     ),
     (
-        'Semanal',
-        'Agendamento semanal',
-        NOW(),
-        NOW()
-    );
-
-    INSERT INTO cleanControl.scheduler (
-        date,
-        active,
-        create_date,
-        update_date,
-        enterprise_id
-    )
-
-    VALUES (
-        '2021-12-01 08:00:00',
-        TRUE,
-        NOW(),
-        NOW(),
-        1
+        50.00,
+        'Cartão de Débito',
+        1,
+        'Completo',
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        2,
+        3
     ),
     (
-        '2021-12-01 14:00:00',
-        TRUE,
-        NOW(),
-        NOW(),
-        2
+        150.00,
+        'Transferência',
+        1,
+        'Completo',
+        '2023-01-01 10:00:00',
+        '2023-01-01 10:00:00',
+        4,
+        4
     );

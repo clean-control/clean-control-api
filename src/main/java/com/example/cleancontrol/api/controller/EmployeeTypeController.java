@@ -34,7 +34,7 @@ public class EmployeeTypeController {
             List<EmployeeTypeResponse> employeeType = employeeTypeService.findAll().stream().map(employeeTypeMapper::toResponse).collect(Collectors.toList());
             return ResponseEntity.ok(employeeType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -45,7 +45,7 @@ public class EmployeeTypeController {
             EmployeeTypeResponse employeeType = employeeTypeMapper.toResponse(employeeTypeService.findById(id));
             return ResponseEntity.ok(employeeType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -56,7 +56,7 @@ public class EmployeeTypeController {
             EmployeeTypeResponse employeeType =employeeTypeMapper.toResponse(employeeTypeService.save(data));
             return ResponseEntity.ok(employeeType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -67,7 +67,7 @@ public class EmployeeTypeController {
             EmployeeTypeResponse employeeType = employeeTypeMapper.toResponse(employeeTypeService.update(id, data));
             return ResponseEntity.ok(employeeType);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -78,7 +78,7 @@ public class EmployeeTypeController {
             employeeTypeService.delete(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
     }
@@ -89,7 +89,7 @@ public class EmployeeTypeController {
             employeeTypeService.active(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+             
             return ResponseEntity.badRequest().build();
         }
       
