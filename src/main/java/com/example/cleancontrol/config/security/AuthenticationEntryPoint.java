@@ -7,6 +7,9 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+import com.example.cleancontrol.api.exceptions.UnauthorizedException;
+import com.example.cleancontrol.api.handler.GlobalExceptionHandler;
+
 import java.io.IOException;
 
 @Component
@@ -14,13 +17,12 @@ public class AuthenticationEntryPoint implements org.springframework.security.we
 
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
-        if (authException.getClass().equals(BadCredentialsException.class)
-                || authException.getClass().equals(InsufficientAuthenticationException.class)){
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-        } else{
-            response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        }
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{ \"error\": \"Unauthorized\",\"statusCode: 401\", \"message\": \"Usuário não autenticado ou token nao localizado\", \"path\": \"" + request.getRequestURI() + "\" }");
     }
 }

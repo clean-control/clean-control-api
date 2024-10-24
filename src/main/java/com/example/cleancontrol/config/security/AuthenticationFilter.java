@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -46,7 +48,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 LOGGER.info("[FALHA AUTENTICACAO] - Token expirado, usuario: {} - {}",
                         exception.getClaims().getSubject(), exception.getMessage());
     
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token exp");
+                // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token exp");
                 
                 throw new UnauthorizedException(requestTokenHeader);
             }
@@ -71,4 +73,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                             SecurityContextHolder.getContext( ).setAuthentication( usernamePasswordAuthenticationToken);
         }
     }
+
+  
 }

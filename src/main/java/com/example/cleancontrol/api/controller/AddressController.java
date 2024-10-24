@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
 import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
+import com.example.cleancontrol.api.exceptions.UnauthorizedException;
 import com.example.cleancontrol.api.mapper.AddressMapper;
 import com.example.cleancontrol.api.service.AddressService;
 import com.example.cleancontrol.domain.model.UserAddress;
@@ -70,7 +71,7 @@ public class AddressController {
             return ResponseEntity.badRequest().build();
         }
     }
-
+    
     @PostMapping
     public ResponseEntity<AddressResponse> createAddress(@RequestBody AddressRequest data) {
 
