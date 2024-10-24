@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS cleanControl.user_type (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    active BOOLEAN NOT NULL,
     create_date TIMESTAMP NOT NULL,
     update_date TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
@@ -278,3 +277,19 @@ CREATE TABLE IF NOT EXISTS cleanControl.file (
     FOREIGN KEY (service_type_id) REFERENCES service_type(id) ON DELETE CASCADE
     );
 -- Depois adicionar as outras tabelas (agenda, lembretes, niveis de acesso, etc... ) ugga bugga 
+
+create or replace VIEW user_accont_view AS
+
+SELECT users.nickname as nickname,
+    users.id as id,
+    users.email as email,
+    users.password as password,
+    address.street as street,
+    address.number as number,
+    address.complement as complement,
+    address.neighborhood as neighborhood,
+    address.city as city,
+    address.state as state,
+    address.cep as cep
+    FROM cleanControl.users AS users
+    JOIN cleanControl.address AS address ON users.address_id = address.id;Í

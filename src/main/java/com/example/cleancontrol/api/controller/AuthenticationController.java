@@ -18,7 +18,7 @@ public class AuthenticationController {
   @Autowired
   private UserService clientService;
 
-  @PostMapping("/authentication")
+  @PostMapping("/api/authentication")
     public ResponseEntity<UserTokenDto> login(@RequestBody UserLoginDto clientLoginDTO){
       UserTokenDto clientToken = this.clientService.authenticate(clientLoginDTO);
         return ResponseEntity.status(200).body(clientToken);

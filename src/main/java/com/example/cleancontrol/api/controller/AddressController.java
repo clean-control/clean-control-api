@@ -3,6 +3,7 @@ package com.example.cleancontrol.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,8 @@ import com.example.cleancontrol.api.dto.addressDto.AddressRequest;
 import com.example.cleancontrol.api.dto.addressDto.AddressResponse;
 import com.example.cleancontrol.api.mapper.AddressMapper;
 import com.example.cleancontrol.api.service.AddressService;
+import com.example.cleancontrol.domain.model.UserAddress;
+import com.example.cleancontrol.domain.repository.UserAddressRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +30,21 @@ public class AddressController {
 
     private final AddressService addressService;
     private final AddressMapper addressMapper;
+
+    private final UserAddressRepository userAddressRepository;
+
+    @GetMapping("/user")
+    public ResponseEntity<List<UserAddress>> getAllUser() {
+
+        try {
+            List<UserAddress> user = userAddressRepository.findAll();
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+             
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
 
     @GetMapping
     public ResponseEntity<List<AddressResponse>> getAllAddress() {

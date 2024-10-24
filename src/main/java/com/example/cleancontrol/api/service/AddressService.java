@@ -26,6 +26,9 @@ public class AddressService {
 
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar Address");
+
+
+            
         }
 
     }

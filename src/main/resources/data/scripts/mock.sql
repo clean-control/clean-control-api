@@ -59,35 +59,30 @@ VALUES (
 INSERT INTO cleanControl.user_type (
         name,
         description,
-        active,
         create_date,
         update_date
     )
 VALUES (
         'Cliente',
         'Usuário que compra produtos e serviços',
-        TRUE,
         '2023-01-01 10:00:00',
         '2023-01-01 10:00:00'
     ),
     (
         'Funcionário',
         'Usuário que trabalha na empresa',
-        TRUE,
         '2023-01-01 10:00:00',
         '2023-01-01 10:00:00'
     ),
     (
         'Administrador',
         'Usuário com acesso total ao sistema',
-        TRUE,
         '2023-01-01 10:00:00',
         '2023-01-01 10:00:00'
     ),
     (
         'Fornecedor',
         'Usuário que fornece produtos e serviços',
-        TRUE,
         '2023-01-01 10:00:00',
         '2023-01-01 10:00:00'
     );
@@ -113,7 +108,7 @@ VALUES (
         'Silva',
         'joao.s',
         'joao@example.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         '12345678900',
         '11999999999',
         '1990-01-01',
@@ -129,7 +124,7 @@ VALUES (
         'Souza',
         'maria.s',
         'maria@example.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         '23456789012',
         '21999999999',
         '1985-05-15',
@@ -145,7 +140,7 @@ VALUES (
         'Lima',
         'pedro.l',
         'pedro@example.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         '34567890123',
         '31999999999',
         '1992-09-30',
@@ -161,7 +156,7 @@ VALUES (
         'Pereira',
         'ana.p',
         'ana@example.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         '45678901234',
         '41999999999',
         '1988-12-12',
@@ -196,7 +191,7 @@ VALUES (
         '12345678000195',
         '11988888888',
         'contato@empresaA.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         'http://example.com/images/empresaA.jpg',
         TRUE,
         '2023-01-01 10:00:00',
@@ -208,7 +203,7 @@ VALUES (
         '98765432000196',
         '21988888888',
         'contato@empresaB.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         'http://example.com/images/empresaB.jpg',
         TRUE,
         '2023-01-01 10:00:00',
@@ -220,7 +215,7 @@ VALUES (
         '12345678000197',
         '31988888888',
         'contato@empresaC.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         'http://example.com/images/empresaC.jpg',
         TRUE,
         '2023-01-01 10:00:00',
@@ -232,7 +227,7 @@ VALUES (
         '98765432000198',
         '41988888888',
         'contato@empresaD.com',
-        'senha123',
+        '2a$10$29IZeSvs9TEXP2EaJefatuRTAZhCshmGyPb6PWMeJNROj94uPd9ta',
         'http://example.com/images/empresaD.jpg',
         TRUE,
         '2023-01-01 10:00:00',
